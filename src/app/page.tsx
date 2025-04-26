@@ -27,7 +27,7 @@ export default function Home() {
           </p>
           <div className="h-64 w-full overflow-hidden rounded-lg shadow-xl md:h-96">
              <Image
-                src="https://picsum.photos/seed/dogfashioncute/800/600" // Updated seed for a dog image
+                src="https://picsum.photos/seed/stylishdog/800/600" // Updated seed for a dog image
                 alt="Perrito usando Pawsome Outfits"
                 width={800}
                 height={600}
