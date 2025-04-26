@@ -27,8 +27,8 @@ export default function Home() {
           </p>
           <div className="h-64 w-full overflow-hidden rounded-lg shadow-xl md:h-96">
              <Image
-                src="https://picsum.photos/seed/stylishdog/800/600" // Updated seed for a dog image
-                alt="Perrito usando Pawsome Outfits"
+                src="https://picsum.photos/seed/whitedog1/800/600" // Updated seed for a white dog image
+                alt="Perrito blanco usando Pawsome Outfits" // Updated alt text
                 width={800}
                 height={600}
                 className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
