@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { HeartIcon, PawPrintIcon, ShirtIcon } from 'lucide-react'; // Example icons
+import { HeartIcon, ShirtIcon } from 'lucide-react'; // Example icons, removed PawPrintIcon
+import { PawPrintIcon } from '@/components/icons/paw-print-icon'; // Import PawPrintIcon
 
 export default function AboutPage() {
   return (
@@ -43,7 +44,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <Card className="text-center">
             <CardHeader>
-              <PawPrintIcon className="mx-auto mb-3 h-12 w-12 text-primary" />
+              <PawPrintIcon className="mx-auto mb-3 h-12 w-12 text-primary" /> {/* Changed icon */}
               <CardTitle>Comfort First</CardTitle>
             </CardHeader>
             <CardContent>

@@ -2,7 +2,8 @@ import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { DogIcon, FacebookIcon, InstagramIcon, TwitterIcon } from 'lucide-react'; // Assuming TwitterIcon exists, replace if needed
+import { FacebookIcon, InstagramIcon, TwitterIcon } from 'lucide-react'; // Removed DogIcon import
+import { PawPrintIcon } from '@/components/icons/paw-print-icon'; // Import PawPrintIcon
 
 export function Footer() {
   return (
@@ -11,7 +12,7 @@ export function Footer() {
         {/* Marca y Redes Sociales */}
         <div className="flex flex-col items-center md:items-start">
           <Link href="/" className="mb-4 flex items-center gap-2 text-lg font-semibold text-primary">
-            <DogIcon className="h-6 w-6" />
+            <PawPrintIcon className="h-6 w-6" /> {/* Changed icon */}
             <span>Pawsome Outfits</span>
           </Link>
           <p className="mb-4 text-center text-sm text-muted-foreground md:text-left">
@@ -38,6 +39,8 @@ export function Footer() {
             <Link href="/about" className="text-sm text-muted-foreground transition-colors hover:text-primary">Nosotros</Link> {/* About Us */}
             <Link href="/blog" className="text-sm text-muted-foreground transition-colors hover:text-primary">Blog</Link>
             <Link href="/contact" className="text-sm text-muted-foreground transition-colors hover:text-primary">Contacto</Link> {/* Contact */}
+            <Link href="/recommend" className="text-sm text-muted-foreground transition-colors hover:text-primary">Recomendador</Link> {/* Recommender */}
+            <Link href="/testimonials" className="text-sm text-muted-foreground transition-colors hover:text-primary">Testimonios</Link> {/* Testimonials */}
           </nav>
         </div>
 

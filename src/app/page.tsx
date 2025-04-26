@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from 'next/link';
 import Image from 'next/image';
-import { DogIcon } from 'lucide-react'; // Assuming DogIcon is appropriate for Spanish too
+import { PawPrintIcon } from '@/components/icons/paw-print-icon'; // Use PawPrintIcon
 
 export default function Home() {
   return (
@@ -58,7 +58,7 @@ export default function Home() {
          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
            {/* Tarjeta de Categoría de Ejemplo */}
            <div className="rounded-lg border bg-card p-4 shadow-sm transition-shadow hover:shadow-md">
-             <DogIcon className="mx-auto mb-3 h-12 w-12 text-primary" />
+             <PawPrintIcon className="mx-auto mb-3 h-12 w-12 text-primary" /> {/* Changed icon */}
              <h3 className="mb-2 text-xl font-medium">Suéteres</h3>
              <p className="text-sm text-muted-foreground">Tejidos acogedores para días fríos.</p>
              <Link href="/shop?category=sweaters" passHref>
@@ -66,7 +66,7 @@ export default function Home() {
              </Link>
            </div>
            <div className="rounded-lg border bg-card p-4 shadow-sm transition-shadow hover:shadow-md">
-             <DogIcon className="mx-auto mb-3 h-12 w-12 text-primary" />
+             <PawPrintIcon className="mx-auto mb-3 h-12 w-12 text-primary" /> {/* Changed icon */}
              <h3 className="mb-2 text-xl font-medium">Impermeables</h3>
              <p className="text-sm text-muted-foreground">Mantente seco con estilo.</p>
               <Link href="/shop?category=raincoats" passHref>
@@ -74,7 +74,7 @@ export default function Home() {
               </Link>
            </div>
            <div className="rounded-lg border bg-card p-4 shadow-sm transition-shadow hover:shadow-md">
-              <DogIcon className="mx-auto mb-3 h-12 w-12 text-primary" />
+              <PawPrintIcon className="mx-auto mb-3 h-12 w-12 text-primary" /> {/* Changed icon */}
              <h3 className="mb-2 text-xl font-medium">Accesorios</h3>
              <p className="text-sm text-muted-foreground">El toque final perfecto.</p>
               <Link href="/shop?category=accessories" passHref>

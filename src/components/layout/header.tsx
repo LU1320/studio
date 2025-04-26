@@ -1,18 +1,20 @@
 'use client';
 
 import Link from 'next/link';
-import { DogIcon, ShoppingCartIcon, MenuIcon } from 'lucide-react';
+import { ShoppingCartIcon, MenuIcon } from 'lucide-react'; // Removed DogIcon import
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { PawPrintIcon } from '@/components/icons/paw-print-icon'; // Import PawPrintIcon
 
 const navItems = [
   { href: '/', label: 'Inicio' }, // Home
   { href: '/shop', label: 'Tienda' }, // Shop
   { href: '/about', label: 'Nosotros' }, // About
   { href: '/blog', label: 'Blog' },
+  { href: '/recommend', label: 'Recomendador' }, // Recommender
   { href: '/testimonials', label: 'Testimonios' }, // Testimonials
   { href: '/contact', label: 'Contacto' }, // Contact
 ];
@@ -26,7 +28,7 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 text-lg font-semibold text-primary">
-          <DogIcon className="h-6 w-6" />
+          <PawPrintIcon className="h-6 w-6" /> {/* Changed icon */}
           <span>Pawsome Outfits</span>
         </Link>
 
@@ -64,7 +66,7 @@ export function Header() {
               <nav className="flex flex-col gap-6">
                 {/* Logo en Menú Móvil */}
                  <Link href="/" className="mb-4 flex items-center gap-2 text-lg font-semibold text-primary" onClick={() => setIsMobileMenuOpen(false)}>
-                    <DogIcon className="h-6 w-6" />
+                    <PawPrintIcon className="h-6 w-6" /> {/* Changed icon */}
                     <span>Pawsome Outfits</span>
                   </Link>
                 {navItems.map((item) => (
