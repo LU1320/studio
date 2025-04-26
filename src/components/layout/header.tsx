@@ -9,12 +9,12 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
 const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/shop', label: 'Shop' },
-  { href: '/about', label: 'About' },
+  { href: '/', label: 'Inicio' }, // Home
+  { href: '/shop', label: 'Tienda' }, // Shop
+  { href: '/about', label: 'Nosotros' }, // About
   { href: '/blog', label: 'Blog' },
-  { href: '/testimonials', label: 'Testimonials' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/testimonials', label: 'Testimonios' }, // Testimonials
+  { href: '/contact', label: 'Contacto' }, // Contact
 ];
 
 export function Header() {
@@ -30,7 +30,7 @@ export function Header() {
           <span>Pawsome Outfits</span>
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Navegación Escritorio */}
         <nav className="hidden items-center gap-6 md:flex">
           {navItems.map((item) => (
             <Link
@@ -46,23 +46,23 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Cart & Mobile Menu Trigger */}
+        {/* Carrito y Menú Móvil */}
         <div className="flex items-center gap-4">
           <Link href="/cart" passHref>
-            <Button variant="ghost" size="icon" aria-label="Shopping Cart">
+            <Button variant="ghost" size="icon" aria-label="Carrito de Compras"> {/* Shopping Cart */}
               <ShoppingCartIcon className="h-5 w-5" />
             </Button>
           </Link>
 
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon" aria-label="Open Menu">
+              <Button variant="ghost" size="icon" aria-label="Abrir Menú"> {/* Open Menu */}
                 <MenuIcon className="h-6 w-6" />
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-full max-w-xs bg-background p-6">
               <nav className="flex flex-col gap-6">
-                {/* Logo in Mobile Menu */}
+                {/* Logo en Menú Móvil */}
                  <Link href="/" className="mb-4 flex items-center gap-2 text-lg font-semibold text-primary" onClick={() => setIsMobileMenuOpen(false)}>
                     <DogIcon className="h-6 w-6" />
                     <span>Pawsome Outfits</span>
