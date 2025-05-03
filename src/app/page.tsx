@@ -25,9 +25,9 @@ export default function Home() {
           {/* Placeholder Image hinting at dogs playing */}
            <div className="relative mt-8 h-64 w-full max-w-3xl overflow-hidden rounded-lg shadow-lg md:h-80">
              <Image
-               src="https://picsum.photos/seed/pawsomepalsplay/800/400"
-               alt="Perritos adorables jugando"
-               data-ai-hint="adorable dogs playing" // AI hint for image generation
+               src="https://firebasestorage.googleapis.com/v0/b/genkit-stackblitz-dev.appspot.com/o/images%2Fdog.jpg?alt=media&token=b3350e54-6919-46bc-a44d-681ee9b98c30"
+               alt="Perrito blanco adorable con fondo rosa" // Updated alt text
+               data-ai-hint="adorable white dog pink background" // Updated AI hint
                layout="fill"
                objectFit="cover"
                priority
@@ -75,7 +75,7 @@ export default function Home() {
          {/* Placeholder for featured items */}
          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
            {/* Example Category Card 1 */}
-           <Link href="/shop?category=toys" className="group block">
+           <Link href="/shop?category=Juguetes%20Divertidos" className="group block"> {/* Updated category link */}
              <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                <div className="relative h-48 w-full">
                  <Image
@@ -94,7 +94,7 @@ export default function Home() {
              </div>
            </Link>
             {/* Example Category Card 2 */}
-           <Link href="/shop?category=apparel" className="group block">
+           <Link href="/shop?category=Moda%20Peluda" className="group block"> {/* Updated category link */}
              <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                <div className="relative h-48 w-full">
                  <Image
@@ -113,8 +113,8 @@ export default function Home() {
              </div>
             </Link>
             {/* Example Category Card 3 */}
-           <Link href="/shop?category=accessories" className="group block">
-             <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+           <Link href="/shop?category=Accesorios%20Encantadores" className="group block"> {/* Updated category link */}
+                <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                 <div className="relative h-48 w-full">
                     <Image
                         src="https://picsum.photos/seed/pawsomeaccessories/400/300"
