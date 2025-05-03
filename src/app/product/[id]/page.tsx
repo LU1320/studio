@@ -14,7 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { StarIcon, ShoppingCartIcon, CheckIcon, InfoIcon, MessageSquareIcon } from 'lucide-react'; // Added CheckIcon, InfoIcon, MessageSquareIcon
+import { StarIcon, ShoppingCartIcon, CheckIcon, InfoIcon, MessageSquareIcon } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
@@ -22,8 +22,8 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { PawPrintIcon } from '@/components/icons/paw-print-icon'; // Added PawPrintIcon
-import Link from 'next/link'; // Ensure Link is imported
+import { PawPrintIcon } from '@/components/icons/paw-print-icon';
+import Link from 'next/link';
 
 const reviewSchema = z.object({
     reviewerName: z.string().min(2, { message: "El nombre debe tener al menos 2 letras." }),
@@ -41,7 +41,7 @@ function ProductDetailPageContent() {
     const [selectedSize, setSelectedSize] = useState<string>('');
     const [selectedColor, setSelectedColor] = useState<string>('');
     const [quantity, setQuantity] = useState<number>(1);
-     const [isSubmittingReview, setIsSubmittingReview] = useState(false);
+    const [isSubmittingReview, setIsSubmittingReview] = useState(false);
 
     const form = useForm<z.infer<typeof reviewSchema>>({
         resolver: zodResolver(reviewSchema),
@@ -222,17 +222,16 @@ function ProductDetailPageContent() {
                             <Label className="mb-2 block text-sm font-medium">Talla:</Label>
                             <RadioGroup value={selectedSize} onValueChange={setSelectedSize} className="flex flex-wrap gap-2">
                                 {product.sizes.map(size => (
-                                    <FormItem key={size}>
-                                        <FormControl>
-                                             <RadioGroupItem value={size} id={`size-${size}`} className="sr-only peer" />
-                                         </FormControl>
-                                         <Label
+                                    // Removed FormItem and FormControl wrapper
+                                    <div key={size}>
+                                        <RadioGroupItem value={size} id={`size-${size}`} className="sr-only peer" />
+                                        <Label
                                             htmlFor={`size-${size}`}
                                             className="flex h-9 w-14 cursor-pointer items-center justify-center rounded-md border border-input bg-background text-sm transition-colors hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary peer-data-[state=checked]:text-primary-foreground"
                                         >
                                             {size}
                                         </Label>
-                                    </FormItem>
+                                    </div>
                                 ))}
                             </RadioGroup>
                         </div>
@@ -244,10 +243,9 @@ function ProductDetailPageContent() {
                             <Label className="mb-2 block text-sm font-medium">Color:</Label>
                             <RadioGroup value={selectedColor} onValueChange={setSelectedColor} className="flex flex-wrap gap-3">
                                 {product.colors.map(color => (
-                                     <FormItem key={color}>
-                                        <FormControl>
-                                             <RadioGroupItem value={color} id={`color-${color}`} className="sr-only peer" />
-                                        </FormControl>
+                                    // Removed FormItem and FormControl wrapper
+                                     <div key={color}>
+                                        <RadioGroupItem value={color} id={`color-${color}`} className="sr-only peer" />
                                         <Label
                                             htmlFor={`color-${color}`}
                                             title={color}
@@ -256,7 +254,7 @@ function ProductDetailPageContent() {
                                         >
                                             {selectedColor === color && <CheckIcon className="h-4 w-4 text-white mix-blend-difference" />}
                                         </Label>
-                                     </FormItem>
+                                     </div>
                                 ))}
                             </RadioGroup>
                         </div>
@@ -523,3 +521,5 @@ export default function ProductDetailPage() {
     </Suspense>
   );
 }
+
+    
