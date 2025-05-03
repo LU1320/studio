@@ -25,11 +25,11 @@ export default function Home() {
           {/* Placeholder Image hinting at dogs playing */}
            <div className="relative mt-8 h-64 w-full max-w-3xl overflow-hidden rounded-lg shadow-lg md:h-80">
            <Image
-               src="https://picsum.photos/seed/happy-white-dog/800/600" // Use a generic seed for a happy dog
+               src="https://firebasestorage.googleapis.com/v0/b/reactn-b2933.appspot.com/o/generated%2Fdog_in_park_with_product.webp?alt=media&token=79a91f33-0ef3-4208-9666-974e6a6324a3" // Updated image URL
                alt="Perro blanco feliz con productos PetCouture" // Updated Alt Text
                data-ai-hint="happy white dog wearing accessory" // Updated AI Hint
-               layout="fill"
-               objectFit="cover"
+               fill // Use fill layout
+               style={{ objectFit: 'cover' }} // Apply object-fit style
                priority
              />
            </div>
@@ -81,8 +81,8 @@ export default function Home() {
                     src="https://picsum.photos/seed/pawsometoys/400/300"
                     alt="Juguetes para perros"
                     data-ai-hint="cute dog toys plush"
-                    layout="fill"
-                    objectFit="cover"
+                    fill // Use fill layout
+                    style={{ objectFit: 'cover' }} // Apply object-fit style
                  />
                </div>
                <div className="p-4">
@@ -100,8 +100,8 @@ export default function Home() {
                     src="https://picsum.photos/seed/pawsomeapparel/400/300"
                     alt="Ropa para perros"
                     data-ai-hint="dog wearing cute sweater"
-                    layout="fill"
-                    objectFit="cover"
+                    fill // Use fill layout
+                    style={{ objectFit: 'cover' }} // Apply object-fit style
                  />
                </div>
                <div className="p-4">
@@ -119,8 +119,8 @@ export default function Home() {
                         src="https://picsum.photos/seed/pawsomeaccessories/400/300"
                         alt="Accesorios para perros"
                          data-ai-hint="dog collar bandana"
-                        layout="fill"
-                        objectFit="cover"
+                        fill // Use fill layout
+                        style={{ objectFit: 'cover' }} // Apply object-fit style
                      />
                 </div>
                <div className="p-4">
@@ -137,7 +137,7 @@ export default function Home() {
         <section className="bg-secondary/50 py-16">
             <div className="container mx-auto px-4 text-center">
                 <CameraIcon className="mx-auto mb-4 h-12 w-12 text-primary" />
-                <h2 className="mb-4 text-3xl font-semibold">¡Muestra a tu Pawsome Pal!</h2>
+                <h2 className="mb-4 text-3xl font-semibold">¡Muestra a tu amigo peludo!</h2> {/* Replaced Pawsome Pal */}
                 <p className="mx-auto mb-6 max-w-xl text-muted-foreground">
                     Nos encanta ver a nuestros amigos peludos disfrutando de sus productos. ¡Visita nuestra galería y comparte tus fotos!
                 </p>

@@ -80,9 +80,9 @@ export default function TestimonialsPage() {
                     <div className="relative aspect-video w-full overflow-hidden">
                       <Image
                         src={review.photoUrl} // Use placeholder if needed: `https://picsum.photos/seed/review${review.id}/400/267`
-                        alt={`${review.reviewerName}'s Pawsome Pal`}
-                        layout="fill"
-                        objectFit="cover"
+                        alt={`El amigo peludo de ${review.reviewerName}`} // Updated Alt Text
+                        fill // Use fill layout
+                        style={{ objectFit: 'cover' }} // Apply object-fit style
                         className="transition-transform duration-300 group-hover:scale-105"
                         data-ai-hint="happy customer dog" // AI Hint
                       />

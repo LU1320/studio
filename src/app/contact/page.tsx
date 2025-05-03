@@ -76,7 +76,7 @@ export default function ContactPage() {
          <PawPrintIcon className="mx-auto mb-4 h-12 w-12 text-primary drop-shadow-lg" />
         <h1 className="mb-4 text-4xl font-bold text-primary md:text-5xl">¡Hablemos!</h1> {/* Playful Title */}
         <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-          ¿Preguntas, ideas o solo quieres saludar? ¡Nos encanta saber de ti y de tu Pawsome Pal!
+          ¿Preguntas, ideas o solo quieres saludar? ¡Nos encanta saber de ti y de tu amigo peludo! {/* Replaced Pawsome Pal */}
         </p>
       </section>
 
@@ -177,7 +177,7 @@ export default function ContactPage() {
                  <PawPrintIcon className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
                 <div>
                   <h4 className="font-semibold">Dirección</h4>
-                  <span className="text-sm text-muted-foreground">123 Calle Pawsome, Ciudad Peluda, CP 90210</span> {/* Playful Address */}
+                  <span className="text-sm text-muted-foreground">123 Calle Ternura, Ciudad Peluda, CP 90210</span> {/* Playful Address */}
                 </div>
               </div>
             </CardContent>
@@ -195,8 +195,8 @@ export default function ContactPage() {
                      <Image
                         src="https://picsum.photos/seed/pawsomemap/600/400" // Placeholder map image
                         alt="Mapa de ubicación de la tienda"
-                        layout="fill"
-                        objectFit="cover"
+                        fill // Use fill layout
+                        style={{ objectFit: 'cover' }} // Apply object-fit style
                          data-ai-hint="map with paw prints" // AI hint
                     />
                      {/* You can overlay paw prints here if desired */}

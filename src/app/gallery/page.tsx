@@ -148,8 +148,8 @@ export default function GalleryPage() {
                 <Image
                     src={image.imageUrl}
                     alt={image.altText}
-                    layout="fill"
-                    objectFit="cover"
+                    fill // Use fill layout
+                    style={{ objectFit: 'cover' }} // Apply object-fit style
                     className="transition-transform duration-300 group-hover:scale-105"
                  />
              </div>

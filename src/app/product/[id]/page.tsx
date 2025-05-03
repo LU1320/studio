@@ -161,8 +161,8 @@ function ProductDetailPageContent() {
                          <Image
                            src={imageUrl}
                             alt={product.name}
-                            layout="fill"
-                            objectFit="cover"
+                            fill // Use fill layout
+                            style={{ objectFit: 'cover' }} // Apply object-fit style
                             priority
                              sizes="(max-width: 1024px) 100vw, 50vw"
                              className="transition-transform duration-300 hover:scale-105"
@@ -175,7 +175,7 @@ function ProductDetailPageContent() {
                      {/* <div className="grid grid-cols-4 gap-2">
                          {[1, 2, 3, 4].map(i => (
                              <div key={i} className="aspect-square relative border rounded overflow-hidden cursor-pointer hover:border-primary">
-                                 <Image src={`https://picsum.photos/seed/thumb${product.id}-${i}/100/100`} layout="fill" objectFit="cover" alt={`Thumbnail ${i}`} />
+                                 <Image src={`https://picsum.photos/seed/thumb${product.id}-${i}/100/100`} fill style={{ objectFit: 'cover' }} alt={`Thumbnail ${i}`} />
                              </div>
                          ))}
                      </div> */}
@@ -419,10 +419,10 @@ function ProductDetailPageContent() {
                                             <div className="mt-4 aspect-video w-full max-w-[200px] overflow-hidden rounded border">
                                                 <Image
                                                     src={review.photoUrl} // Use placeholder if needed: `https://picsum.photos/seed/reviewphoto${review.id}/200/112`
-                                                    alt={`${review.reviewerName}'s PetCouture Pal`} // Updated Alt Text
+                                                    alt={`El amigo peludo de ${review.reviewerName}`} // Updated Alt Text
                                                     width={200}
                                                     height={112}
-                                                    objectFit="cover"
+                                                    style={{ objectFit: 'cover' }} // Use style for objectFit
                                                     className="h-full w-full"
                                                     data-ai-hint="customer dog photo review" // AI Hint
                                                 />

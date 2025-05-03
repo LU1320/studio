@@ -50,7 +50,7 @@ const getPostBySlug = async (slug: string) => {
     },
     {
       id: '2',
-      title: 'Guía de Tallas Pawsome: ¡Que la Ropita le Quede Perfecta!',
+      title: 'Guía de Tallas PetCouture: ¡Que la Ropita le Quede Perfecta!', // Updated Title
       slug: 'guia-tallas-ropita',
       excerpt: 'Medir a tu perrito es fácil y divertido. Asegura el ajuste perfecto para máxima comodidad y estilo...',
       author: 'Modista Canina',
@@ -58,7 +58,7 @@ const getPostBySlug = async (slug: string) => {
       imageUrl: 'https://picsum.photos/seed/pawsomeblogmeasure/800/400',
       dataAiHint: 'dog being measured with tape',
       content: `
-        <p class="mb-4">¡Que tu Pawsome Pal luzca increíble empieza con la talla correcta! Evita devoluciones y asegura que tu perrito esté cómodo siguiendo estos sencillos pasos:</p>
+        <p class="mb-4">¡Que tu amigo peludo luzca increíble empieza con la talla correcta! Evita devoluciones y asegura que tu perrito esté cómodo siguiendo estos sencillos pasos:</p>
 
         <ul class="list-none space-y-4 mb-6 pl-0">
             <li class="flex items-start gap-3">
@@ -94,7 +94,7 @@ const getPostBySlug = async (slug: string) => {
       imageUrl: 'https://picsum.photos/seed/pawsomeblogpark/800/400',
       dataAiHint: 'dogs playing fetch in park',
       content: `
-        <p class="mb-4">¡El parque es el paraíso social de nuestros Pawsome Pals! Es el lugar perfecto para correr, jugar y... ¡lucir fabuloso! Aquí te damos ideas para que tu perrito esté cómodo y a la moda:</p>
+        <p class="mb-4">¡El parque es el paraíso social de nuestros amigos peludos! Es el lugar perfecto para correr, jugar y... ¡lucir fabuloso! Aquí te damos ideas para que tu perrito esté cómodo y a la moda:</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
             <Card>
@@ -209,8 +209,8 @@ function BlogPostPageContent() {
                      <Image
                         src={post.imageUrl}
                         alt={post.title}
-                        layout="fill"
-                        objectFit="cover"
+                        fill // Changed layout to fill
+                        style={{ objectFit: 'cover' }} // Use style for objectFit with fill
                         priority
                         className="rounded-lg"
                         data-ai-hint={post.dataAiHint} // Added AI hint
