@@ -22,14 +22,13 @@ export default function Home() {
           <p className="mb-6 max-w-lg text-lg text-muted-foreground md:text-xl">
             Impresiona con ternura, ¡como un perrito! {/* Slogan */}
           </p>
-          {/* Placeholder Image hinting at dogs playing */}
-           <div className="relative mt-8 h-64 w-full max-w-3xl overflow-hidden rounded-lg shadow-lg md:h-80">
+          {/* Logo Image */}
+           <div className="relative mt-8 h-48 w-48 overflow-hidden rounded-lg shadow-lg md:h-56 md:w-56"> {/* Adjusted size for logo */}
            <Image
-               src="https://firebasestorage.googleapis.com/v0/b/reactn-b2933.appspot.com/o/generated%2Fdog_in_park_with_product.webp?alt=media&token=79a91f33-0ef3-4208-9666-974e6a6324a3" // Updated image URL
-               alt="Perro blanco feliz con productos PetCouture" // Updated Alt Text
-               data-ai-hint="happy white dog wearing accessory" // Updated AI Hint
+               src="/logo.png" // Updated image path to local logo
+               alt="PetCouture Logo" // Updated Alt Text
                fill // Use fill layout
-               style={{ objectFit: 'cover' }} // Apply object-fit style
+               style={{ objectFit: 'contain' }} // Use contain to show the whole logo
                priority
              />
            </div>
