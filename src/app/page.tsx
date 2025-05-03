@@ -25,7 +25,7 @@ export default function Home() {
           {/* Placeholder Image hinting at dogs playing */}
            <div className="relative mt-8 h-64 w-full max-w-3xl overflow-hidden rounded-lg shadow-lg md:h-80">
              <Image
-               src="https://firebasestorage.googleapis.com/v0/b/genkit-stackblitz-dev.appspot.com/o/images%2Fdog.jpg?alt=media&token=b3350e54-6919-46bc-a44d-681ee9b98c30"
+               src="https://firebasestorage.googleapis.com/v0/b/genkit-stackblitz-dev.appspot.com/o/images%2Fdog.jpg?alt=media&token=b3350e54-6919-46bc-a44d-681ee9b98c30" // Updated image URL
                alt="Perrito blanco adorable con fondo rosa" // Updated alt text
                data-ai-hint="adorable white dog pink background" // Updated AI hint
                layout="fill"
