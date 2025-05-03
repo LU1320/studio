@@ -8,7 +8,7 @@ import { ProductCard } from '@/components/products/product-card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
-import { FilterIcon, ArrowUpDown } from 'lucide-react';
+import { FilterIcon, ArrowUpDown, SlidersHorizontalIcon } from 'lucide-react'; // Added SlidersHorizontalIcon
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -25,15 +25,15 @@ function ShopPageContent() {
   const [sortOption, setSortOption] = useState<string>('default');
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]); // Example range
-  const [maxPrice, setMaxPrice] = useState(100); // Max price from products
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
+  const [maxPrice, setMaxPrice] = useState(100);
 
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get('category');
 
-  // Available filters (should ideally be dynamic based on products)
-  const availableSizes = ['S', 'M', 'L', 'XL'];
-  const availableColors = ['Blue', 'Red', 'Yellow', 'Green', 'Pink', 'Black', 'White']; // Example
+  // Fetch available filters dynamically from products
+  const [availableSizes, setAvailableSizes] = useState<string[]>([]);
+  const [availableColors, setAvailableColors] = useState<string[]>([]);
 
   useEffect(() => {
     async function loadProducts() {
@@ -41,13 +41,25 @@ function ShopPageContent() {
       try {
         const allProducts = await getProducts();
         setProducts(allProducts);
-        // Calculate max price for slider
-        const maxProductPrice = Math.max(...allProducts.map(p => p.price), 0);
-        setMaxPrice(Math.ceil(maxProductPrice / 10) * 10); // Round up to nearest 10
-        setPriceRange([0, Math.ceil(maxProductPrice / 10) * 10]);
+
+        // Dynamically determine filters and max price
+        const sizes = new Set<string>();
+        const colors = new Set<string>();
+        let currentMaxPrice = 0;
+        allProducts.forEach(p => {
+          p.sizes.forEach(s => sizes.add(s));
+          p.colors.forEach(c => colors.add(c));
+          if (p.price > currentMaxPrice) currentMaxPrice = p.price;
+        });
+
+        setAvailableSizes(Array.from(sizes).sort()); // Sort sizes
+        setAvailableColors(Array.from(colors).sort()); // Sort colors
+        const roundedMaxPrice = Math.ceil(currentMaxPrice / 10) * 10 || 100; // Ensure max price is at least 100
+        setMaxPrice(roundedMaxPrice);
+        setPriceRange([0, roundedMaxPrice]);
+
       } catch (error) {
         console.error("Failed to fetch products:", error);
-        // Handle error state if needed
       } finally {
         setIsLoading(false);
       }
@@ -58,14 +70,18 @@ function ShopPageContent() {
   useEffect(() => {
     let tempProducts = [...products];
 
-    // Filter by initial category if present
-    if (initialCategory) {
-        // Basic category matching - adjust if your product data has explicit categories
-        tempProducts = tempProducts.filter(p =>
-            p.name.toLowerCase().includes(initialCategory.toLowerCase()) ||
-            p.description.toLowerCase().includes(initialCategory.toLowerCase())
-        );
-    }
+    // Filter by initial category (if present)
+     if (initialCategory) {
+         // Match against the 'category' field if it exists, otherwise fall back to name/description matching
+         tempProducts = tempProducts.filter(p =>
+             (p.category && p.category.toLowerCase() === initialCategory.toLowerCase()) ||
+             (!p.category && (
+                 p.name.toLowerCase().includes(initialCategory.toLowerCase()) ||
+                 p.description.toLowerCase().includes(initialCategory.toLowerCase())
+             ))
+         );
+     }
+
 
     // Filter by size
     if (selectedSizes.length > 0) {
@@ -80,21 +96,31 @@ function ShopPageContent() {
     // Filter by price range
     tempProducts = tempProducts.filter(p => p.price >= priceRange[0] && p.price <= priceRange[1]);
 
-
     // Sort products
-    if (sortOption === 'price-asc') {
-      tempProducts.sort((a, b) => a.price - b.price);
-    } else if (sortOption === 'price-desc') {
-      tempProducts.sort((a, b) => b.price - a.price);
-    } else if (sortOption === 'name-asc') {
-        tempProducts.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sortOption === 'name-desc') {
-        tempProducts.sort((a, b) => b.name.localeCompare(a.name));
+    switch (sortOption) {
+        case 'price-asc':
+            tempProducts.sort((a, b) => a.price - b.price);
+            break;
+        case 'price-desc':
+            tempProducts.sort((a, b) => b.price - a.price);
+            break;
+        case 'name-asc':
+            tempProducts.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+        case 'name-desc':
+            tempProducts.sort((a, b) => b.name.localeCompare(a.name));
+            break;
+        case 'newest': // Assuming products have a date or implicit order means newest first
+             // If no date, reverse the original fetched order (if that represents newest)
+             // Or sort by ID descending if IDs are sequential/time-based
+             tempProducts.sort((a, b) => parseInt(b.id) - parseInt(a.id)); // Example: sort by ID descending
+             break;
+         // default: // 'default' or 'popularity' might rely on backend data not available here
     }
-     // Default sort can be by ID or leave as is
+
 
     setFilteredProducts(tempProducts);
-    setCurrentPage(1); // Reset to first page on filter/sort change
+    setCurrentPage(1);
   }, [products, sortOption, selectedSizes, selectedColors, priceRange, initialCategory]);
 
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
@@ -119,9 +145,9 @@ function ShopPageContent() {
   const renderSkeletons = () => (
     Array.from({ length: PRODUCTS_PER_PAGE }).map((_, index) => (
         <div key={index} className="flex flex-col space-y-3">
-            <Skeleton className="h-[200px] w-full rounded-xl" />
-            <div className="space-y-2">
-                <Skeleton className="h-4 w-3/4" />
+            <Skeleton className="h-[250px] w-full rounded-xl" /> {/* Increased height */}
+            <div className="space-y-2 p-2">
+                <Skeleton className="h-5 w-3/4" /> {/* Slightly larger text */}
                 <Skeleton className="h-4 w-1/2" />
             </div>
         </div>
@@ -129,131 +155,165 @@ function ShopPageContent() {
   );
 
 
-  const FilterSidebar = () => (
+  const FilterSidebar = ({ isMobile = false }: { isMobile?: boolean }) => (
      <div className="space-y-6">
-         <div>
-             <Label className="mb-2 block text-sm font-medium">Sort By</Label>
-             <Select value={sortOption} onValueChange={setSortOption}>
-                <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Default" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="default">Default</SelectItem>
-                    <SelectItem value="price-asc">Price: Low to High</SelectItem>
-                    <SelectItem value="price-desc">Price: High to Low</SelectItem>
-                    <SelectItem value="name-asc">Name: A to Z</SelectItem>
-                    <SelectItem value="name-desc">Name: Z to A</SelectItem>
-                </SelectContent>
-            </Select>
-         </div>
-
-         <div>
-             <Label className="mb-2 block text-sm font-medium">Size</Label>
-             <div className="space-y-2">
-                 {availableSizes.map(size => (
-                     <div key={size} className="flex items-center space-x-2">
-                         <Checkbox
-                             id={`size-${size}`}
-                             checked={selectedSizes.includes(size)}
-                             onCheckedChange={() => handleSizeChange(size)}
-                         />
-                         <Label htmlFor={`size-${size}`} className="text-sm font-normal">{size}</Label>
-                     </div>
-                 ))}
+         {/* Sorting only on mobile sheet */}
+         {isMobile && (
+             <div>
+                 <Label className="mb-2 block text-sm font-medium">Ordenar Por</Label>
+                 <Select value={sortOption} onValueChange={setSortOption}>
+                    <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Seleccionar orden" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="default">Populares</SelectItem>
+                         <SelectItem value="newest">Novedades</SelectItem>
+                        <SelectItem value="price-asc">Precio: Menor a Mayor</SelectItem>
+                        <SelectItem value="price-desc">Precio: Mayor a Menor</SelectItem>
+                        <SelectItem value="name-asc">Nombre: A a Z</SelectItem>
+                        <SelectItem value="name-desc">Nombre: Z a A</SelectItem>
+                    </SelectContent>
+                </Select>
              </div>
-         </div>
+         )}
 
+         {/* Price Range */}
          <div>
-            <Label className="mb-2 block text-sm font-medium">Color</Label>
-            <div className="grid grid-cols-3 gap-2">
-                {availableColors.map(color => (
-                    <div key={color} className="flex items-center space-x-2">
-                        <Checkbox
-                            id={`color-${color}`}
-                            checked={selectedColors.includes(color)}
-                            onCheckedChange={() => handleColorChange(color)}
-                        />
-                        {/* Optional: Add color swatch */}
-                        {/* <span className="inline-block h-4 w-4 rounded-full border" style={{ backgroundColor: color.toLowerCase() }}></span> */}
-                        <Label htmlFor={`color-${color}`} className="text-sm font-normal">{color}</Label>
-                    </div>
-                ))}
-            </div>
-        </div>
-
-         <div>
-            <Label className="mb-4 block text-sm font-medium">Price Range</Label>
+            <Label className="mb-4 block text-sm font-medium">Rango de Precios</Label>
              <Slider
                 defaultValue={[0, maxPrice]}
                 max={maxPrice}
-                step={5} // Adjust step as needed
+                step={5}
                 value={priceRange}
                 onValueChange={(value) => setPriceRange(value as [number, number])}
                 className="w-full"
             />
-            <div className="mt-2 flex justify-between text-sm text-muted-foreground">
+            <div className="mt-2 flex justify-between text-xs text-muted-foreground"> {/* Smaller text */}
                 <span>${priceRange[0]}</span>
                 <span>${priceRange[1]}</span>
             </div>
         </div>
 
+         {/* Sizes */}
+         {availableSizes.length > 0 && (
+             <div>
+                 <Label className="mb-2 block text-sm font-medium">Talla</Label>
+                 <div className="grid grid-cols-3 gap-2"> {/* Grid layout */}
+                     {availableSizes.map(size => (
+                         <div key={size} className="flex items-center space-x-2">
+                             <Checkbox
+                                 id={`${isMobile ? 'm-' : ''}size-${size}`}
+                                 checked={selectedSizes.includes(size)}
+                                 onCheckedChange={() => handleSizeChange(size)}
+                             />
+                             <Label htmlFor={`${isMobile ? 'm-' : ''}size-${size}`} className="text-sm font-normal cursor-pointer">{size}</Label>
+                         </div>
+                     ))}
+                 </div>
+             </div>
+         )}
+
+        {/* Colors */}
+         {availableColors.length > 0 && (
+             <div>
+                <Label className="mb-2 block text-sm font-medium">Color</Label>
+                <div className="grid grid-cols-3 gap-x-2 gap-y-3"> {/* Grid layout */}
+                    {availableColors.map(color => (
+                        <div key={color} className="flex items-center space-x-2">
+                            <Checkbox
+                                id={`${isMobile ? 'm-' : ''}color-${color}`}
+                                checked={selectedColors.includes(color)}
+                                onCheckedChange={() => handleColorChange(color)}
+                            />
+                            {/* Optional: Add color swatch */}
+                            <span className="inline-block h-4 w-4 rounded-full border" style={{ backgroundColor: color.toLowerCase() === 'white' ? '#eee' : color.toLowerCase() }}></span>
+                            <Label htmlFor={`${isMobile ? 'm-' : ''}color-${color}`} className="text-sm font-normal cursor-pointer">{color}</Label>
+                        </div>
+                    ))}
+                </div>
+            </div>
+         )}
+
+
+        {/* Clear Filters Button */}
         <Button onClick={() => {
             setSelectedSizes([]);
             setSelectedColors([]);
             setPriceRange([0, maxPrice]);
-        }} variant="outline" className="w-full">
-            Clear Filters
+            setSortOption('default'); // Reset sort as well
+        }} variant="outline" className="w-full border-destructive text-destructive hover:bg-destructive/10"> {/* Destructive outline */}
+            Limpiar Filtros
         </Button>
      </div>
   );
 
+  // Determine category title
+  let categoryTitle = "Todos los Productos";
+  if (initialCategory) {
+      const foundProduct = products.find(p => p.category?.toLowerCase() === initialCategory.toLowerCase());
+      if (foundProduct && foundProduct.category) {
+          categoryTitle = foundProduct.category; // Use the exact category name from product
+      } else {
+          // Fallback for categories derived from URL but not explicitly in product data
+          categoryTitle = initialCategory.charAt(0).toUpperCase() + initialCategory.slice(1);
+      }
+  }
+
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="mb-6 text-3xl font-bold">Shop {initialCategory ? `- ${initialCategory.charAt(0).toUpperCase() + initialCategory.slice(1)}` : ''}</h1>
+    <div className="container mx-auto px-4 py-12"> {/* Increased py */}
+      <h1 className="mb-8 text-center text-3xl font-bold md:text-4xl">{categoryTitle} Adorables</h1> {/* Playful Title */}
 
       <div className="flex flex-col gap-8 md:flex-row">
         {/* Desktop Filters */}
         <aside className="hidden w-full md:block md:w-1/4 lg:w-1/5">
-          <h2 className="mb-4 text-xl font-semibold">Filters</h2>
-          <FilterSidebar />
+          <div className="sticky top-20 space-y-6 rounded-lg border bg-card p-4 shadow-sm"> {/* Sticky filters */}
+            <h2 className="flex items-center gap-2 text-lg font-semibold">
+                <SlidersHorizontalIcon className="h-5 w-5" /> Filtros
+            </h2>
+            <FilterSidebar />
+          </div>
         </aside>
 
         {/* Mobile Filters Trigger & Product Grid */}
         <main className="w-full md:w-3/4 lg:w-4/5">
-          <div className="mb-4 flex items-center justify-between">
+          <div className="mb-6 flex items-center justify-between"> {/* Increased mb */}
             <p className="text-sm text-muted-foreground">
-              Showing {paginatedProducts.length} of {filteredProducts.length} products
+              Mostrando {paginatedProducts.length} de {filteredProducts.length} ternuras
             </p>
-            {/* Mobile Filter Trigger */}
+
+            {/* Desktop Sort */}
+             <div className="hidden md:block">
+                 <Select value={sortOption} onValueChange={setSortOption}>
+                    <SelectTrigger className="w-[200px] text-sm"> {/* Increased width */}
+                        <ArrowUpDown className="mr-2 inline-block h-4 w-4 text-muted-foreground" />
+                        <SelectValue placeholder="Ordenar por..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="default">Populares</SelectItem>
+                         <SelectItem value="newest">Novedades</SelectItem>
+                        <SelectItem value="price-asc">Precio: Menor a Mayor</SelectItem>
+                        <SelectItem value="price-desc">Precio: Mayor a Menor</SelectItem>
+                        <SelectItem value="name-asc">Nombre: A a Z</SelectItem>
+                        <SelectItem value="name-desc">Nombre: Z a A</SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
+
+             {/* Mobile Filter Trigger */}
              <Sheet>
                 <SheetTrigger asChild className="md:hidden">
                     <Button variant="outline" size="sm">
-                        <FilterIcon className="mr-2 h-4 w-4" /> Filters
+                        <FilterIcon className="mr-2 h-4 w-4" /> Filtros y Orden
                     </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="w-full max-w-xs overflow-y-auto p-6">
                     <SheetHeader>
-                        <SheetTitle className="mb-4">Filters</SheetTitle>
+                        <SheetTitle className="mb-4 text-lg">Filtros y Orden</SheetTitle> {/* Updated title */}
                     </SheetHeader>
-                    <FilterSidebar />
+                    <FilterSidebar isMobile={true} />
                 </SheetContent>
             </Sheet>
-             {/* Desktop Sort (moved from filters for better layout) */}
-             <div className="hidden md:block">
-                 <Select value={sortOption} onValueChange={setSortOption}>
-                    <SelectTrigger className="w-[180px]">
-                        <ArrowUpDown className="mr-2 inline-block h-4 w-4 text-muted-foreground" />
-                        <SelectValue placeholder="Sort by..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="default">Default</SelectItem>
-                        <SelectItem value="price-asc">Price: Low to High</SelectItem>
-                        <SelectItem value="price-desc">Price: High to Low</SelectItem>
-                        <SelectItem value="name-asc">Name: A to Z</SelectItem>
-                        <SelectItem value="name-desc">Name: Z to A</SelectItem>
-                    </SelectContent>
-                </Select>
-            </div>
           </div>
 
           {/* Product Grid */}
@@ -264,28 +324,30 @@ function ShopPageContent() {
                   <ProductCard key={product.id} product={product} />
               ))}
              {!isLoading && paginatedProducts.length === 0 && (
-                <p className="col-span-full text-center text-muted-foreground">No products found matching your criteria.</p>
+                <p className="col-span-full py-10 text-center text-muted-foreground">¡Oh no! No encontramos ternuras con esos filtros.</p>
              )}
           </div>
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="mt-8 flex justify-center space-x-2">
+            <div className="mt-10 flex justify-center space-x-1"> {/* Adjusted spacing */}
               <Button
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
                 variant="outline"
                 size="sm"
               >
-                Previous
+                Anterior
               </Button>
+              {/* Display subset of page numbers for many pages */}
+              {/* TODO: Implement smarter pagination display (e.g., ellipsis) */}
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                 <Button
                   key={page}
                   onClick={() => setCurrentPage(page)}
                   variant={currentPage === page ? 'default' : 'outline'}
-                  size="sm"
-                  className="w-10"
+                  size="icon" // Use icon size for page numbers
+                  className="h-9 w-9"
                 >
                   {page}
                 </Button>
@@ -296,7 +358,7 @@ function ShopPageContent() {
                 variant="outline"
                 size="sm"
               >
-                Next
+                Siguiente
               </Button>
             </div>
           )}
@@ -308,51 +370,52 @@ function ShopPageContent() {
 
 
 export default function ShopPage() {
+  // Wrap with Suspense because useSearchParams() needs it
   return (
-    // Wrap with Suspense because useSearchParams() needs it
     <Suspense fallback={<ShopPageLoading />}>
       <ShopPageContent />
     </Suspense>
   );
 }
 
+// Loading Skeleton remains largely the same, could be slightly adjusted for padding/sizes if needed
 function ShopPageLoading() {
-    // Basic loading skeleton for the whole page structure
     return (
-      <div className="container mx-auto px-4 py-8">
-        <Skeleton className="mb-6 h-8 w-1/4" />
+      <div className="container mx-auto px-4 py-12">
+        <Skeleton className="mb-8 h-8 w-1/3" />
         <div className="flex flex-col gap-8 md:flex-row">
           <aside className="hidden w-full md:block md:w-1/4 lg:w-1/5">
-            <Skeleton className="mb-4 h-6 w-1/3" />
-            <div className="space-y-4">
-              <Skeleton className="h-8 w-full" />
-              <Skeleton className="h-20 w-full" />
-              <Skeleton className="h-20 w-full" />
-              <Skeleton className="h-16 w-full" />
-            </div>
+             <div className="sticky top-20 space-y-4 rounded-lg border bg-card p-4 shadow-sm">
+                 <Skeleton className="h-6 w-1/3" />
+                 <Skeleton className="h-8 w-full" />
+                 <Skeleton className="h-20 w-full" />
+                 <Skeleton className="h-20 w-full" />
+                 <Skeleton className="h-16 w-full" />
+                 <Skeleton className="h-8 w-full" />
+             </div>
           </aside>
           <main className="w-full md:w-3/4 lg:w-4/5">
-            <div className="mb-4 flex items-center justify-between">
+            <div className="mb-6 flex items-center justify-between">
               <Skeleton className="h-4 w-1/3" />
-              <Skeleton className="h-8 w-24 md:hidden" /> {/* Mobile filter button skeleton */}
-              <Skeleton className="hidden h-8 w-36 md:block" /> {/* Desktop sort skeleton */}
+              <Skeleton className="h-8 w-36 md:hidden" /> {/* Mobile filter button skeleton */}
+              <Skeleton className="hidden h-10 w-48 md:block" /> {/* Desktop sort skeleton */}
             </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {Array.from({ length: PRODUCTS_PER_PAGE }).map((_, index) => (
                   <div key={index} className="flex flex-col space-y-3">
-                      <Skeleton className="h-[200px] w-full rounded-xl" />
-                      <div className="space-y-2">
-                          <Skeleton className="h-4 w-3/4" />
+                      <Skeleton className="h-[250px] w-full rounded-xl" />
+                      <div className="space-y-2 p-2">
+                          <Skeleton className="h-5 w-3/4" />
                           <Skeleton className="h-4 w-1/2" />
                       </div>
                   </div>
               ))}
             </div>
-             <div className="mt-8 flex justify-center space-x-2">
-                <Skeleton className="h-8 w-20" />
-                <Skeleton className="h-8 w-10" />
-                <Skeleton className="h-8 w-10" />
-                <Skeleton className="h-8 w-20" />
+             <div className="mt-10 flex justify-center space-x-1">
+                <Skeleton className="h-9 w-20" />
+                <Skeleton className="h-9 w-9" />
+                <Skeleton className="h-9 w-9" />
+                <Skeleton className="h-9 w-20" />
              </div>
           </main>
         </div>

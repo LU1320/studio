@@ -1,22 +1,23 @@
 'use client';
 
 import Link from 'next/link';
-import { ShoppingCartIcon, MenuIcon } from 'lucide-react'; // Removed DogIcon import
+import { ShoppingCartIcon, MenuIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { PawPrintIcon } from '@/components/icons/paw-print-icon'; // Import PawPrintIcon
+import { PawPrintIcon } from '@/components/icons/paw-print-icon'; // Use PawPrintIcon
 
 const navItems = [
-  { href: '/', label: 'Inicio' }, // Home
-  { href: '/shop', label: 'Tienda' }, // Shop
-  { href: '/about', label: 'Nosotros' }, // About
+  { href: '/', label: 'Inicio' },
+  { href: '/shop', label: 'Productos' }, // Changed from Tienda to Productos
+  { href: '/gallery', label: 'Galería' }, // Added Gallery
   { href: '/blog', label: 'Blog' },
-  { href: '/recommend', label: 'Recomendador' }, // Recommender
-  { href: '/testimonials', label: 'Testimonios' }, // Testimonials
-  { href: '/contact', label: 'Contacto' }, // Contact
+  { href: '/testimonials', label: 'Testimonios' },
+  { href: '/contact', label: 'Contacto' },
+  // { href: '/about', label: 'Nosotros' }, // About removed as per sections
+  // { href: '/recommend', label: 'Recomendador' }, // Recommender removed as per sections
 ];
 
 export function Header() {
@@ -28,8 +29,8 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 text-lg font-semibold text-primary">
-          <PawPrintIcon className="h-6 w-6" /> {/* Changed icon */}
-          <span>Pawsome Outfits</span>
+          <PawPrintIcon className="h-7 w-7 text-primary" /> {/* Use PawPrintIcon, increased size */}
+          <span className="font-bold">Pawsome Pals</span> {/* Updated Brand Name */}
         </Link>
 
         {/* Navegación Escritorio */}
@@ -40,7 +41,7 @@ export function Header() {
               href={item.href}
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary",
-                pathname === item.href ? "text-primary" : "text-muted-foreground"
+                pathname === item.href ? "text-primary font-semibold" : "text-muted-foreground" // Highlight active link
               )}
             >
               {item.label}
@@ -49,33 +50,33 @@ export function Header() {
         </nav>
 
         {/* Carrito y Menú Móvil */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4"> {/* Adjusted gap */}
           <Link href="/cart" passHref>
-            <Button variant="ghost" size="icon" aria-label="Carrito de Compras"> {/* Shopping Cart */}
+            <Button variant="ghost" size="icon" aria-label="Carrito de Compras">
               <ShoppingCartIcon className="h-5 w-5" />
             </Button>
           </Link>
 
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon" aria-label="Abrir Menú"> {/* Open Menu */}
+              <Button variant="ghost" size="icon" aria-label="Abrir Menú">
                 <MenuIcon className="h-6 w-6" />
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-full max-w-xs bg-background p-6">
-              <nav className="flex flex-col gap-6">
-                {/* Logo en Menú Móvil */}
-                 <Link href="/" className="mb-4 flex items-center gap-2 text-lg font-semibold text-primary" onClick={() => setIsMobileMenuOpen(false)}>
-                    <PawPrintIcon className="h-6 w-6" /> {/* Changed icon */}
-                    <span>Pawsome Outfits</span>
-                  </Link>
+               {/* Logo en Menú Móvil */}
+               <Link href="/" className="mb-6 flex items-center gap-2 text-xl font-bold text-primary" onClick={() => setIsMobileMenuOpen(false)}>
+                  <PawPrintIcon className="h-7 w-7 text-primary" />
+                  <span>Pawsome Pals</span>
+                </Link>
+              <nav className="flex flex-col gap-4"> {/* Adjusted gap */}
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "text-lg font-medium transition-colors hover:text-primary",
-                       pathname === item.href ? "text-primary" : "text-foreground"
+                      "text-base font-medium transition-colors hover:text-primary py-2", // Increased font size and padding
+                       pathname === item.href ? "text-primary font-semibold" : "text-foreground"
                     )}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >

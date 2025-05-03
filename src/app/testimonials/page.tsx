@@ -3,23 +3,15 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import type { Review } from '@/services/reviews';
-import { getReviews } from '@/services/reviews'; // Assume getReviews can fetch reviews across all products if needed, or adjust logic
+// Use getAllReviews from the existing service
+import { getAllReviews } from '@/services/reviews';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { StarIcon } from 'lucide-react';
+import { StarIcon, MessageSquareIcon } from 'lucide-react'; // Added MessageSquareIcon
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-
-// Mock fetching all reviews (adjust based on your actual API)
-const getAllReviews = async (): Promise<Review[]> => {
-  // In a real app, this might fetch reviews with product info or from a dedicated endpoint
-  // For now, we'll simulate by fetching reviews for a couple of product IDs
-  const reviews1 = await getReviews('1');
-  const reviews2 = await getReviews('2');
-   // Add more product IDs if needed, or modify getReviews service
-  return [...reviews1, ...reviews2]; // Combine reviews
-};
+import { PawPrintIcon } from '@/components/icons/paw-print-icon'; // Import PawPrintIcon
 
 export default function TestimonialsPage() {
   const [allReviews, setAllReviews] = useState<Review[]>([]);
@@ -29,10 +21,10 @@ export default function TestimonialsPage() {
     async function loadReviews() {
       setIsLoading(true);
       try {
-        // In a real app, fetch *all* reviews or a paginated list
-        const fetchedReviews = await getAllReviews();
-        // Optional: Sort reviews, e.g., by date (if available) or rating
-        setAllReviews(fetchedReviews);
+        const fetchedReviews = await getAllReviews(); // Use existing service function
+        // Sort reviews, e.g., newest first
+        const sortedReviews = fetchedReviews.sort((a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime());
+        setAllReviews(sortedReviews);
       } catch (error) {
         console.error("Failed to load testimonials:", error);
         // Handle error state if needed
@@ -45,23 +37,23 @@ export default function TestimonialsPage() {
 
    const renderSkeletons = () => (
     Array.from({ length: 6 }).map((_, index) => (
-      <Card key={index} className="overflow-hidden">
-        <CardHeader className="flex flex-row items-center gap-3 pb-2">
+      <Card key={index} className="overflow-hidden border bg-card">
+        <CardHeader className="flex flex-row items-center gap-3 pb-2 p-4"> {/* Adjusted padding */}
           <Skeleton className="h-10 w-10 rounded-full" />
           <div className="space-y-1">
-            <Skeleton className="h-4 w-32" />
+            <Skeleton className="h-4 w-24" /> {/* Shorter name skel */}
             <Skeleton className="h-3 w-16" />
           </div>
         </CardHeader>
-        <CardContent className="space-y-2">
-          <div className="flex">
+        <CardContent className="space-y-2 p-4"> {/* Adjusted padding */}
+          <div className="flex gap-0.5"> {/* Adjusted gap */}
             {[...Array(5)].map((_, i) => (
-              <Skeleton key={i} className="h-4 w-4" />
+              <Skeleton key={i} className="h-4 w-4 rounded-full" /> // Star skeleton
             ))}
           </div>
           <Skeleton className="h-4 w-full" />
           <Skeleton className="h-4 w-5/6" />
-           <Skeleton className="mt-4 h-32 w-full rounded" /> {/* Image skeleton */}
+           <Skeleton className="mt-4 aspect-video w-full rounded" /> {/* Image skeleton */}
         </CardContent>
       </Card>
     ))
@@ -70,67 +62,76 @@ export default function TestimonialsPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <section className="mb-12 text-center">
-        <h1 className="mb-4 text-4xl font-bold text-primary md:text-5xl">Happy Pups, Happy Parents!</h1>
+         <PawPrintIcon className="mx-auto mb-4 h-12 w-12 text-primary drop-shadow-lg" />
+        <h1 className="mb-4 text-4xl font-bold text-primary md:text-5xl">¡Colitas Felices Hablan!</h1> {/* Playful Title */}
         <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-          See what our amazing customers are saying about Pawsome Outfits.
+          Nuestros Pawsome Pals y sus humanos comparten su experiencia. ¡Pura ternura y alegría!
         </p>
       </section>
 
       {/* Testimonials Grid */}
-      <section className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <section className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"> {/* Adjusted gap */}
         {isLoading
           ? renderSkeletons()
           : allReviews.length > 0
             ? allReviews.map((review) => (
-              <Card key={review.id} className="flex flex-col overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-md">
-                <CardHeader className="flex flex-row items-center gap-3 pb-2">
-                  <Avatar>
-                     {/* Use placeholder if no photoUrl or simplify */}
-                     <AvatarFallback>{review.reviewerName.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <CardTitle className="text-base font-medium">{review.reviewerName}</CardTitle>
-                    {/* Optional: Link to the product reviewed */}
-                     <Link href={`/product/${review.productId}`} className="text-xs text-primary hover:underline">
-                         View Product
-                    </Link>
-                  </div>
-                </CardHeader>
-                <CardContent className="flex flex-grow flex-col">
-                   <div className="mb-2 flex items-center">
-                        {[...Array(5)].map((_, i) => (
-                            <StarIcon key={i} className={`h-4 w-4 ${i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground'}`} />
-                        ))}
-                    </div>
-                  <p className="mb-4 flex-grow text-sm text-muted-foreground">{review.comment}</p>
-                  {review.photoUrl && (
-                    <div className="relative mt-auto aspect-video w-full overflow-hidden rounded border">
+              <Card key={review.id} className="flex h-full flex-col overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:border-primary/30 hover:-translate-y-1">
+                 {review.photoUrl && ( // Show image first if available
+                    <div className="relative aspect-video w-full overflow-hidden">
                       <Image
-                        src={review.photoUrl}
-                        alt={`${review.reviewerName}'s dog wearing the product`}
+                        src={review.photoUrl} // Use placeholder if needed: `https://picsum.photos/seed/review${review.id}/400/267`
+                        alt={`${review.reviewerName}'s Pawsome Pal`}
                         layout="fill"
                         objectFit="cover"
-                        className="transition-transform duration-300 hover:scale-105"
+                        className="transition-transform duration-300 group-hover:scale-105"
+                        data-ai-hint="happy customer dog" // AI Hint
                       />
                     </div>
                   )}
+                <CardHeader className="flex flex-row items-center justify-between gap-3 pb-2 p-4"> {/* Space between name and stars */}
+                   <div className="flex items-center gap-3">
+                      <Avatar className="h-10 w-10 border-2 border-primary/20"> {/* Added border */}
+                          {/* Fallback with first letter */}
+                         <AvatarFallback className="bg-secondary text-secondary-foreground">{review.reviewerName.charAt(0).toUpperCase()}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <CardTitle className="text-sm font-semibold">{review.reviewerName}</CardTitle> {/* Smaller title */}
+                        {/* Optional: Link to the product reviewed */}
+                         <Link href={`/product/${review.productId}`} className="text-xs text-primary hover:underline">
+                             Ver Producto
+                        </Link>
+                      </div>
+                   </div>
+                   {/* Stars */}
+                    <div className="flex items-center gap-0.5">
+                        {[...Array(5)].map((_, i) => (
+                            <StarIcon key={i} className={`h-4 w-4 ${i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground/50'}`} />
+                        ))}
+                    </div>
+                </CardHeader>
+                <CardContent className="flex flex-grow flex-col p-4 pt-0"> {/* Adjusted padding */}
+                    <blockquote className="mt-2 border-l-4 border-primary/30 pl-4 italic text-muted-foreground"> {/* Quote style */}
+                        <p className="text-sm leading-relaxed">{review.comment}</p>
+                    </blockquote>
+
                 </CardContent>
               </Card>
             ))
             : (
-              <p className="col-span-full text-center text-muted-foreground">No testimonials yet. Be the first to share your experience!</p>
+              <p className="col-span-full py-10 text-center text-muted-foreground">Aún no hay testimonios. ¡Anímate a ser el primero en compartir tu ternura!</p>
             )}
       </section>
 
       {/* Call to Action */}
-       <section className="mt-16 text-center">
-         <h2 className="mb-4 text-2xl font-semibold">Share Your Pawsome Look!</h2>
+       <section className="mt-16 text-center rounded-lg bg-gradient-to-r from-primary/10 to-accent/10 py-12"> {/* Gradient background */}
+         <MessageSquareIcon className="mx-auto mb-4 h-10 w-10 text-primary" />
+         <h2 className="mb-4 text-2xl font-semibold">¿Tu Perrito Ama sus Cositas?</h2>
          <p className="mx-auto mb-6 max-w-xl text-muted-foreground">
-             Bought something you love? Leave a review on the product page or tag us on social media #PawsomeOutfits
+             ¡Nos encantaría escuchar tu historia! Deja una reseña en la página del producto o etiquétanos #PawsomePals.
          </p>
           <Link href="/shop" passHref>
-             <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-                 Shop Now & Share
+             <Button size="lg">
+                 Comprar y Compartir Ternura
              </Button>
           </Link>
        </section>

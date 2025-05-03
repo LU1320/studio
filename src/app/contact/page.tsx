@@ -9,14 +9,22 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MailIcon, PhoneIcon, MapPinIcon, FacebookIcon, InstagramIcon, TwitterIcon } from 'lucide-react';
-import Link from 'next/link';
+import { MailIcon, PhoneIcon, MapPinIcon, SendIcon } from 'lucide-react'; // Added SendIcon
+import { PawPrintIcon } from '@/components/icons/paw-print-icon'; // Use PawPrintIcon
+import Image from 'next/image'; // Import Image for map placeholder
+import Link from 'next/link'; // Keep Link for social media
+
+// Playful icons for form fields (Example using inline SVGs or Lucide if suitable)
+const NameIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
+const EmailIcon = MailIcon; // Reuse MailIcon
+const SubjectIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="m12 14 4-4"/><path d="M10 20v-4.5a3.5 3.5 0 0 1 7 0V20"/><path d="M6 20v-1.5a3.5 3.5 0 0 1 7 0V20"/><path d="M18 8v5a3 3 0 0 1-3 3h-3a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3z"/></svg>; // Bone shape?
+const MessageIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>; // Speech bubble
 
 const contactFormSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  subject: z.string().min(5, { message: "Subject must be at least 5 characters." }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+  name: z.string().min(2, { message: "Tu nombre debe tener al menos 2 letras." }),
+  email: z.string().email({ message: "Por favor, ingresa un email válido." }),
+  subject: z.string().min(5, { message: "El asunto debe tener al menos 5 letras." }),
+  message: z.string().min(10, { message: "Tu mensaje debe tener al menos 10 letras." }),
 });
 
 export default function ContactPage() {
@@ -33,44 +41,48 @@ export default function ContactPage() {
   });
 
   async function onSubmit(values: z.infer<typeof contactFormSchema>) {
-    // Simulate form submission
-    console.log("Form submitted:", values);
+    console.log("Formulario enviado:", values);
+    setIsLoading(true); // Set loading state
     await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
 
-    // TODO: Replace with actual API call to send the message
     try {
-      // const response = await fetch('/api/contact', { method: 'POST', body: JSON.stringify(values) });
-      // if (!response.ok) throw new Error('Network response was not ok');
-
+      // TODO: Replace with actual API call
       toast({
-        title: "Message Sent!",
-        description: "Thank you for contacting us. We'll get back to you soon.",
+        title: "¡Mensaje Recibido!",
+        description: "¡Gracias por contactarnos! Te responderemos con mucha ternura pronto.",
       });
-      form.reset(); // Reset form on success
+      form.reset();
     } catch (error) {
-      console.error("Failed to send message:", error);
+      console.error("Fallo al enviar mensaje:", error);
       toast({
-        title: "Submission Error",
-        description: "Could not send your message. Please try again later.",
+        title: "Error de Envío",
+        description: "No pudimos enviar tu mensaje. Intenta de nuevo más tarde.",
         variant: "destructive",
       });
+    } finally {
+        setIsLoading(false); // Reset loading state
     }
   }
+
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
+
 
   return (
     <div className="container mx-auto px-4 py-12">
       <section className="mb-12 text-center">
-        <h1 className="mb-4 text-4xl font-bold text-primary md:text-5xl">Get In Touch</h1>
+         <PawPrintIcon className="mx-auto mb-4 h-12 w-12 text-primary drop-shadow-lg" />
+        <h1 className="mb-4 text-4xl font-bold text-primary md:text-5xl">¡Hablemos!</h1> {/* Playful Title */}
         <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-          Have questions, suggestions, or just want to say hi? We'd love to hear from you!
+          ¿Preguntas, ideas o solo quieres saludar? ¡Nos encanta saber de ti y de tu Pawsome Pal!
         </p>
       </section>
 
-      <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-5"> {/* Adjusted grid layout */}
+
         {/* Contact Form */}
-        <Card>
+        <Card className="lg:col-span-3"> {/* Form takes more space */}
           <CardHeader>
-            <CardTitle>Send Us a Message</CardTitle>
+            <CardTitle className="text-2xl">Envíanos un Mensaje Peludo</CardTitle> {/* Playful Title */}
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -80,9 +92,9 @@ export default function ContactPage() {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel className="flex items-center gap-2"><NameIcon /> Nombre</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your Name" {...field} />
+                        <Input placeholder="Tu Nombre" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -93,9 +105,9 @@ export default function ContactPage() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                       <FormLabel className="flex items-center gap-2"><EmailIcon className="h-4 w-4 text-primary"/> Email</FormLabel>
                       <FormControl>
-                        <Input type="email" placeholder="your.email@example.com" {...field} />
+                        <Input type="email" placeholder="tu.email@ejemplo.com" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -106,9 +118,9 @@ export default function ContactPage() {
                   name="subject"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Subject</FormLabel>
+                       <FormLabel className="flex items-center gap-2"><SubjectIcon /> Asunto</FormLabel>
                       <FormControl>
-                        <Input placeholder="What is your message about?" {...field} />
+                        <Input placeholder="¿Sobre qué quieres hablar?" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -119,75 +131,78 @@ export default function ContactPage() {
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Message</FormLabel>
+                       <FormLabel className="flex items-center gap-2"><MessageIcon /> Mensaje</FormLabel>
                       <FormControl>
-                        <Textarea placeholder="Write your message here..." {...field} rows={5} />
+                        <Textarea placeholder="Escribe tu mensaje aquí con mucha ternura..." {...field} rows={5} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <Button type="submit" disabled={form.formState.isSubmitting} className="w-full bg-accent text-accent-foreground hover:bg-accent/90 md:w-auto">
-                  {form.formState.isSubmitting ? 'Sending...' : 'Send Message'}
+                <Button type="submit" disabled={isLoading} className="w-full md:w-auto">
+                  {isLoading ? 'Enviando...' : <>Enviar Mensaje <SendIcon className="ml-2 h-4 w-4" /></>}
                 </Button>
               </form>
             </Form>
           </CardContent>
         </Card>
 
-        {/* Contact Information & Socials */}
-        <div className="space-y-8">
+        {/* Contact Information & Map */}
+        <div className="space-y-8 lg:col-span-2"> {/* Info/Map takes less space */}
           <Card>
             <CardHeader>
-              <CardTitle>Contact Information</CardTitle>
+              <CardTitle className="text-2xl">Info de Contacto</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-start gap-4">
-                <MailIcon className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
+                <PawPrintIcon className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
                 <div>
                   <h4 className="font-semibold">Email</h4>
-                  <a href="mailto:support@pawsomeoutfits.com" className="text-sm text-muted-foreground hover:text-primary">
-                    support@pawsomeoutfits.com
+                  <a href="mailto:hola@pawsomepals.com" className="text-sm text-muted-foreground hover:text-primary">
+                    hola@pawsomepals.com {/* Updated email */}
                   </a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <PhoneIcon className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
+                 <PawPrintIcon className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
                 <div>
-                  <h4 className="font-semibold">Phone</h4>
-                  <span className="text-sm text-muted-foreground">(123) 456-7890</span> {/* Replace with actual number if available */}
+                  <h4 className="font-semibold">Teléfono</h4>
+                  <span className="text-sm text-muted-foreground">(555) TERNURA</span> {/* Playful number */}
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <MapPinIcon className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
+                 <PawPrintIcon className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
                 <div>
-                  <h4 className="font-semibold">Address</h4>
-                  <span className="text-sm text-muted-foreground">123 Pawsome St, Dogville, CA 90210</span> {/* Replace with actual address or remove */}
+                  <h4 className="font-semibold">Dirección</h4>
+                  <span className="text-sm text-muted-foreground">123 Calle Pawsome, Ciudad Peluda, CP 90210</span> {/* Playful Address */}
                 </div>
               </div>
             </CardContent>
           </Card>
 
+          {/* Map Placeholder */}
           <Card>
-            <CardHeader>
-              <CardTitle>Follow Us</CardTitle>
-            </CardHeader>
-            <CardContent>
-               <p className="mb-4 text-sm text-muted-foreground">Connect with us on social media for cute pup pics and updates!</p>
-               <div className="flex gap-6">
-                <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                  <FacebookIcon className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
-                </Link>
-                <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                  <InstagramIcon className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
-                </Link>
-                 <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                   <TwitterIcon className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
-                 </Link>
-                 {/* Add other social media links (TikTok, etc.) */}
-              </div>
-            </CardContent>
+             <CardHeader>
+               <CardTitle className="text-2xl">Encuéntranos</CardTitle>
+             </CardHeader>
+             <CardContent>
+                 <p className="mb-4 text-sm text-muted-foreground">¡Ven a visitarnos si tienes una tienda física!</p>
+                 <div className="relative h-64 w-full overflow-hidden rounded-lg border">
+                     {/* Replace with actual map component or iframe */}
+                     <Image
+                        src="https://picsum.photos/seed/pawsomemap/600/400" // Placeholder map image
+                        alt="Mapa de ubicación de la tienda"
+                        layout="fill"
+                        objectFit="cover"
+                         data-ai-hint="map with paw prints" // AI hint
+                    />
+                     {/* You can overlay paw prints here if desired */}
+                 </div>
+             </CardContent>
           </Card>
+
+           {/* Socials can be moved here or stay in footer */}
+
         </div>
       </div>
     </div>

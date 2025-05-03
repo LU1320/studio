@@ -16,10 +16,10 @@
  */
 
 import * as ai from '@/ai/ai-instance';
-import { recommendOutfit } from './flows/outfit-recommendation'; // Import the recommendOutfit flow
+// Removed import for recommendOutfit
 
 export const config = {
   plugins: [ai.googleAI()],
   logLevel: 'debug',
-  flows: [recommendOutfit], // Add the recommendOutfit flow here
+  flows: [], // Removed recommendOutfit flow
 };

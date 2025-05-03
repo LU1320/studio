@@ -1,80 +1,154 @@
 import { Button } from "@/components/ui/button";
 import Link from 'next/link';
 import Image from 'next/image';
-import { PawPrintIcon } from '@/components/icons/paw-print-icon'; // Use PawPrintIcon
+import { PawPrintIcon } from '@/components/icons/paw-print-icon';
+import { HeartIcon, GiftIcon, CameraIcon } from 'lucide-react'; // Added icons
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* Sección Principal */}
-      <section className="relative mb-12 flex flex-col items-center justify-center rounded-lg bg-gradient-to-r from-primary/70 to-accent/50 p-8 text-center text-primary-foreground shadow-lg md:p-16">
-        <div className="absolute inset-0 z-0 rounded-lg opacity-30 mix-blend-multiply">
-          {/* Background pattern or soft background */}
-          {/* <Image
-            src="https://picsum.photos/1200/400?grayscale&blur=2"
-            alt="Patrón de fondo"
-            layout="fill"
-            objectFit="cover"
-            priority
-            className="rounded-lg"
-          /> */}
-        </div>
-        <div className="relative z-10">
-          <h1 className="mb-4 text-4xl font-bold md:text-6xl">
-            Pawsome Outfits
+    <div className="flex flex-col"> {/* Removed container for full-width sections */}
+
+      {/* Hero Section */}
+      <section className="relative flex min-h-[60vh] flex-col items-center justify-center bg-gradient-to-b from-primary/20 via-background to-background p-8 text-center text-foreground shadow-inner md:min-h-[70vh] md:p-16">
+         {/* Optional: Add a subtle background pattern */}
+         {/* <div className="absolute inset-0 z-0 opacity-5 pattern-[squares] pattern-primary pattern-size-6"></div> */}
+
+         {/* Placeholder for animation/slider - currently static */}
+         <div className="relative z-10 flex flex-col items-center">
+           <PawPrintIcon className="mb-4 h-16 w-16 text-primary drop-shadow-lg" />
+          <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-6xl">
+            Pawsome Pals
           </h1>
-          <p className="mb-6 text-lg md:text-xl">
-            Ropa linda y cómoda para perritos modernos
+          <p className="mb-6 max-w-lg text-lg text-muted-foreground md:text-xl">
+            Impresiona con ternura, ¡como un perrito! {/* Slogan */}
           </p>
-          {/* Image Removed */}
+          {/* Placeholder Image hinting at dogs playing */}
+           <div className="relative mt-8 h-64 w-full max-w-3xl overflow-hidden rounded-lg shadow-lg md:h-80">
+             <Image
+               src="https://picsum.photos/seed/pawsomepalsplay/800/400"
+               alt="Perritos adorables jugando"
+               data-ai-hint="adorable dogs playing" // AI hint for image generation
+               layout="fill"
+               objectFit="cover"
+               priority
+               className="rounded-lg"
+             />
+           </div>
           <Link href="/shop" passHref>
-            <Button size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
-              Compra Ahora
+            <Button size="lg" className="mt-8 animate-bounce"> {/* Added bounce animation */}
+              Ver Productos Adorables
             </Button>
           </Link>
         </div>
       </section>
 
-      {/* Sección de Valores de Marca */}
-      <section className="mb-12 text-center">
-        <h2 className="mb-4 text-3xl font-semibold">Nuestra Promesa Pawsome</h2>
-        <p className="mx-auto max-w-2xl text-muted-foreground">
-          Creemos que cada perrito merece verse y sentirse genial. Por eso diseñamos atuendos adorables y de alta calidad que son tan cómodos como elegantes. ¡Hecho con amor para el cachorro moderno!
-        </p>
-      </section>
-
-       {/* Opcional: Productos Destacados o Categorías */}
-       <section className="text-center">
-         <h2 className="mb-6 text-3xl font-semibold">Explora Nuestras Colecciones</h2>
-         {/* Placeholder para artículos destacados - se puede implementar después */}
-         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-           {/* Tarjeta de Categoría de Ejemplo */}
-           <div className="rounded-lg border bg-card p-4 shadow-sm transition-shadow hover:shadow-md">
-             <PawPrintIcon className="mx-auto mb-3 h-12 w-12 text-primary" /> {/* Changed icon */}
-             <h3 className="mb-2 text-xl font-medium">Suéteres</h3>
-             <p className="text-sm text-muted-foreground">Tejidos acogedores para días fríos.</p>
-             <Link href="/shop?category=sweaters" passHref>
-                <Button variant="outline" size="sm" className="mt-4">Ver Suéteres</Button>
-             </Link>
-           </div>
-           <div className="rounded-lg border bg-card p-4 shadow-sm transition-shadow hover:shadow-md">
-             <PawPrintIcon className="mx-auto mb-3 h-12 w-12 text-primary" /> {/* Changed icon */}
-             <h3 className="mb-2 text-xl font-medium">Impermeables</h3>
-             <p className="text-sm text-muted-foreground">Mantente seco con estilo.</p>
-              <Link href="/shop?category=raincoats" passHref>
-                 <Button variant="outline" size="sm" className="mt-4">Ver Impermeables</Button>
-              </Link>
-           </div>
-           <div className="rounded-lg border bg-card p-4 shadow-sm transition-shadow hover:shadow-md">
-              <PawPrintIcon className="mx-auto mb-3 h-12 w-12 text-primary" /> {/* Changed icon */}
-             <h3 className="mb-2 text-xl font-medium">Accesorios</h3>
-             <p className="text-sm text-muted-foreground">El toque final perfecto.</p>
-              <Link href="/shop?category=accessories" passHref>
-                 <Button variant="outline" size="sm" className="mt-4">Ver Accesorios</Button>
-              </Link>
-           </div>
+      {/* Values/Promise Section */}
+       <section className="bg-card py-16 text-center">
+         <div className="container mx-auto px-4">
+            <h2 className="mb-4 text-3xl font-semibold">Nuestra Promesa Peluda</h2>
+            <p className="mx-auto max-w-2xl text-muted-foreground">
+              En Pawsome Pals, cada detalle está pensado con amor. Creamos productos adorables y de alta calidad que hacen sonreír tanto a los perritos como a sus humanos.
+            </p>
+             <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
+                 <div className="flex flex-col items-center">
+                     <HeartIcon className="mb-3 h-12 w-12 text-primary" />
+                     <h3 className="mb-2 text-xl font-medium">Hecho con Amor</h3>
+                     <p className="text-sm text-muted-foreground">Seleccionamos materiales suaves y seguros para la felicidad de tu peludo.</p>
+                 </div>
+                  <div className="flex flex-col items-center">
+                     <GiftIcon className="mb-3 h-12 w-12 text-primary" />
+                     <h3 className="mb-2 text-xl font-medium">Diseños Únicos</h3>
+                     <p className="text-sm text-muted-foreground">Estilos divertidos y tiernos que reflejan la personalidad de tu mejor amigo.</p>
+                 </div>
+                 <div className="flex flex-col items-center">
+                      <PawPrintIcon className="mb-3 h-12 w-12 text-primary" />
+                      <h3 className="mb-2 text-xl font-medium">Calidad Duradera</h3>
+                      <p className="text-sm text-muted-foreground">Productos resistentes para acompañar todas sus aventuras.</p>
+                  </div>
+             </div>
          </div>
        </section>
+
+       {/* Featured Products/Categories Section */}
+       <section className="container mx-auto px-4 py-16 text-center">
+         <h2 className="mb-8 text-3xl font-semibold">Colecciones Llenas de Ternura</h2>
+         {/* Placeholder for featured items */}
+         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+           {/* Example Category Card 1 */}
+           <Link href="/shop?category=toys" className="group block">
+             <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+               <div className="relative h-48 w-full">
+                 <Image
+                    src="https://picsum.photos/seed/pawsometoys/400/300"
+                    alt="Juguetes para perros"
+                    data-ai-hint="cute dog toys plush"
+                    layout="fill"
+                    objectFit="cover"
+                 />
+               </div>
+               <div className="p-4">
+                 <h3 className="mb-1 text-xl font-medium text-foreground group-hover:text-primary">Juguetes Divertidos</h3>
+                 <p className="text-sm text-muted-foreground">Para horas de alegría y colitas felices.</p>
+                 <Button variant="link" size="sm" className="mt-2 px-0 group-hover:text-primary">Ver Juguetes <span className="ml-1 transition-transform group-hover:translate-x-1">&rarr;</span></Button>
+               </div>
+             </div>
+           </Link>
+            {/* Example Category Card 2 */}
+           <Link href="/shop?category=apparel" className="group block">
+             <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+               <div className="relative h-48 w-full">
+                 <Image
+                    src="https://picsum.photos/seed/pawsomeapparel/400/300"
+                    alt="Ropa para perros"
+                    data-ai-hint="dog wearing cute sweater"
+                    layout="fill"
+                    objectFit="cover"
+                 />
+               </div>
+               <div className="p-4">
+                 <h3 className="mb-1 text-xl font-medium text-foreground group-hover:text-primary">Moda Peluda</h3>
+                 <p className="text-sm text-muted-foreground">Ropita cómoda y adorable para cada ocasión.</p>
+                  <Button variant="link" size="sm" className="mt-2 px-0 group-hover:text-primary">Ver Ropa <span className="ml-1 transition-transform group-hover:translate-x-1">&rarr;</span></Button>
+               </div>
+             </div>
+            </Link>
+            {/* Example Category Card 3 */}
+           <Link href="/shop?category=accessories" className="group block">
+             <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                <div className="relative h-48 w-full">
+                    <Image
+                        src="https://picsum.photos/seed/pawsomeaccessories/400/300"
+                        alt="Accesorios para perros"
+                         data-ai-hint="dog collar bandana"
+                        layout="fill"
+                        objectFit="cover"
+                     />
+                </div>
+               <div className="p-4">
+                 <h3 className="mb-1 text-xl font-medium text-foreground group-hover:text-primary">Accesorios Encantadores</h3>
+                 <p className="text-sm text-muted-foreground">El toque final perfecto para tu amigo fiel.</p>
+                 <Button variant="link" size="sm" className="mt-2 px-0 group-hover:text-primary">Ver Accesorios <span className="ml-1 transition-transform group-hover:translate-x-1">&rarr;</span></Button>
+               </div>
+             </div>
+            </Link>
+         </div>
+       </section>
+
+        {/* Gallery CTA Section */}
+        <section className="bg-secondary/50 py-16">
+            <div className="container mx-auto px-4 text-center">
+                <CameraIcon className="mx-auto mb-4 h-12 w-12 text-primary" />
+                <h2 className="mb-4 text-3xl font-semibold">¡Muestra a tu Pawsome Pal!</h2>
+                <p className="mx-auto mb-6 max-w-xl text-muted-foreground">
+                    Nos encanta ver a nuestros amigos peludos disfrutando de sus productos. ¡Visita nuestra galería y comparte tus fotos!
+                </p>
+                <Link href="/gallery" passHref>
+                    <Button size="lg" variant="outline">
+                        Ir a la Galería
+                    </Button>
+                </Link>
+            </div>
+        </section>
 
     </div>
   );
