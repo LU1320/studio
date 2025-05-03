@@ -13,6 +13,7 @@ import { MailIcon, PhoneIcon, MapPinIcon, SendIcon } from 'lucide-react'; // Add
 import { PawPrintIcon } from '@/components/icons/paw-print-icon'; // Use PawPrintIcon
 import Image from 'next/image'; // Import Image for map placeholder
 import Link from 'next/link'; // Keep Link for social media
+import { useState } from 'react'; // Added useState
 
 // Playful icons for form fields (Example using inline SVGs or Lucide if suitable)
 const NameIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
@@ -40,6 +41,8 @@ export default function ContactPage() {
     },
   });
 
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
+
   async function onSubmit(values: z.infer<typeof contactFormSchema>) {
     console.log("Formulario enviado:", values);
     setIsLoading(true); // Set loading state
@@ -64,7 +67,7 @@ export default function ContactPage() {
     }
   }
 
-  const [isLoading, setIsLoading] = useState(false); // Add loading state
+
 
 
   return (
@@ -158,8 +161,8 @@ export default function ContactPage() {
                 <PawPrintIcon className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
                 <div>
                   <h4 className="font-semibold">Email</h4>
-                  <a href="mailto:hola@pawsomepals.com" className="text-sm text-muted-foreground hover:text-primary">
-                    hola@pawsomepals.com {/* Updated email */}
+                  <a href="mailto:hola@petcouture.com" className="text-sm text-muted-foreground hover:text-primary">
+                    hola@petcouture.com {/* Updated email */}
                   </a>
                 </div>
               </div>

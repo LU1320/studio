@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import Link from 'next/link';
 import Image from 'next/image';
@@ -18,21 +17,20 @@ export default function Home() {
          <div className="relative z-10 flex flex-col items-center">
            <PawPrintIcon className="mb-4 h-16 w-16 text-primary drop-shadow-lg" />
           <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-6xl">
-            Pawsome Pals
+            PetCouture
           </h1>
           <p className="mb-6 max-w-lg text-lg text-muted-foreground md:text-xl">
             Impresiona con ternura, ¡como un perrito! {/* Slogan */}
           </p>
           {/* Placeholder Image hinting at dogs playing */}
            <div className="relative mt-8 h-64 w-full max-w-3xl overflow-hidden rounded-lg shadow-lg md:h-80">
-             <Image
-               src="https://firebasestorage.googleapis.com/v0/b/genkit-stackblitz-dev.appspot.com/o/images%2Fdog.jpg?alt=media&token=b3350e54-6919-46bc-a44d-681ee9b98c30" // Updated image URL
-               alt="Perrito blanco adorable con fondo rosa" // Updated alt text
-               data-ai-hint="adorable white dog pink background" // Updated AI hint
+           <Image
+               src="https://picsum.photos/seed/happy-white-dog/800/600" // Use a generic seed for a happy dog
+               alt="Perro blanco feliz con productos PetCouture" // Updated Alt Text
+               data-ai-hint="happy white dog wearing accessory" // Updated AI Hint
                layout="fill"
                objectFit="cover"
                priority
-               className="" // Removed redundant rounding, parent div handles it
              />
            </div>
           <Link href="/shop" passHref>
@@ -48,7 +46,7 @@ export default function Home() {
          <div className="container mx-auto px-4">
             <h2 className="mb-4 text-3xl font-semibold">Nuestra Promesa Peluda</h2>
             <p className="mx-auto max-w-2xl text-muted-foreground">
-              En Pawsome Pals, cada detalle está pensado con amor. Creamos productos adorables y de alta calidad que hacen sonreír tanto a los perritos como a sus humanos.
+              En PetCouture, cada detalle está pensado con amor. Creamos productos adorables y de alta calidad que hacen sonreír tanto a los perritos como a sus humanos.
             </p>
              <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
                  <div className="flex flex-col items-center">

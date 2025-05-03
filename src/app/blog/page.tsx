@@ -45,7 +45,7 @@ export default function BlogPage() {
     <div className="container mx-auto px-4 py-12">
       <section className="mb-12 text-center">
          <PawPrintIcon className="mx-auto mb-4 h-12 w-12 text-primary drop-shadow-lg" /> {/* Icon */}
-        <h1 className="mb-4 text-4xl font-bold text-primary md:text-5xl">Blog Pawsome Pals</h1> {/* Updated Title */}
+        <h1 className="mb-4 text-4xl font-bold text-primary md:text-5xl">Blog PetCouture</h1> {/* Updated Title */}
         <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
           Consejos, trucos y pura ternura para los papás perrunos más geniales.
         </p>

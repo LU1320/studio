@@ -65,7 +65,7 @@ export default function TestimonialsPage() {
          <PawPrintIcon className="mx-auto mb-4 h-12 w-12 text-primary drop-shadow-lg" />
         <h1 className="mb-4 text-4xl font-bold text-primary md:text-5xl">¡Colitas Felices Hablan!</h1> {/* Playful Title */}
         <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-          Nuestros Pawsome Pals y sus humanos comparten su experiencia. ¡Pura ternura y alegría!
+          Nuestros clientes de PetCouture y sus humanos comparten su experiencia. ¡Pura ternura y alegría!
         </p>
       </section>
 
@@ -127,7 +127,7 @@ export default function TestimonialsPage() {
          <MessageSquareIcon className="mx-auto mb-4 h-10 w-10 text-primary" />
          <h2 className="mb-4 text-2xl font-semibold">¿Tu Perrito Ama sus Cositas?</h2>
          <p className="mx-auto mb-6 max-w-xl text-muted-foreground">
-             ¡Nos encantaría escuchar tu historia! Deja una reseña en la página del producto o etiquétanos #PawsomePals.
+             ¡Nos encantaría escuchar tu historia! Deja una reseña en la página del producto o etiquétanos #PetCouture.
          </p>
           <Link href="/shop" passHref>
              <Button size="lg">

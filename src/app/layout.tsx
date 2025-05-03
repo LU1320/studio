@@ -13,7 +13,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'Pawsome Pals - Ternura Peluda', // New Title
+  title: 'PetCouture - Ternura Peluda', // Updated Title
   description: 'Productos adorables y divertidos para tu mejor amigo peludo. ¡Impresiona con ternura!', // New Description reflecting slogan
 };
 

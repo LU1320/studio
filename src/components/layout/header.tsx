@@ -30,7 +30,7 @@ export function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 text-lg font-semibold text-primary">
           <PawPrintIcon className="h-7 w-7 text-primary" /> {/* Use PawPrintIcon, increased size */}
-          <span className="font-bold">Pawsome Pals</span> {/* Updated Brand Name */}
+          <span className="font-bold">PetCouture</span> {/* Updated Brand Name */}
         </Link>
 
         {/* Navegación Escritorio */}
@@ -67,7 +67,7 @@ export function Header() {
                {/* Logo en Menú Móvil */}
                <Link href="/" className="mb-6 flex items-center gap-2 text-xl font-bold text-primary" onClick={() => setIsMobileMenuOpen(false)}>
                   <PawPrintIcon className="h-7 w-7 text-primary" />
-                  <span>Pawsome Pals</span>
+                  <span>PetCouture</span> {/* Updated Brand Name */}
                 </Link>
               <nav className="flex flex-col gap-4"> {/* Adjusted gap */}
                 {navItems.map((item) => (

@@ -23,7 +23,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { PawPrintIcon } from '@/components/icons/paw-print-icon'; // Added PawPrintIcon
-
+import Link from 'next/link'; // Ensure Link is imported
 
 const reviewSchema = z.object({
     reviewerName: z.string().min(2, { message: "El nombre debe tener al menos 2 letras." }),
@@ -209,7 +209,7 @@ function ProductDetailPageContent() {
                     <p className="text-3xl font-semibold text-primary">${product.price.toFixed(2)}</p>
 
                      {/* Description */}
-                     <div className="text-muted-foreground space-y-2 text-sm leading-relaxed">
+                     <div className="space-y-2 text-sm leading-relaxed text-muted-foreground">
                          <p>{product.description}</p>
                          {/* Add more details if available */}
                          {/* <p>Material: Algodón Suavecito</p> */}
@@ -286,7 +286,7 @@ function ProductDetailPageContent() {
                     </Button>
 
                      {/* Additional Info/Shipping Teaser */}
-                     <div className="flex items-center gap-2 text-xs text-muted-foreground border-t pt-4 mt-auto">
+                     <div className="mt-auto flex items-center gap-2 border-t pt-4 text-xs text-muted-foreground">
                          <InfoIcon className="h-4 w-4"/>
                          <span>Envío rápido disponible. Consulta nuestra <Link href="/shipping-policy" className="underline hover:text-primary">política de envíos</Link>.</span>
                      </div>
@@ -298,7 +298,7 @@ function ProductDetailPageContent() {
              {/* Reviews Section */}
              <section id="reviews-section" aria-labelledby="reviews-heading">
                  <div className="mb-8 flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
-                     <h2 id="reviews-heading" className="text-2xl font-semibold lg:text-3xl">Opiniones de Pawsome Pals</h2>
+                     <h2 id="reviews-heading" className="text-2xl font-semibold lg:text-3xl">Opiniones de PetCouture</h2>
                       <Link href="#review-form">
                          <Button variant="outline">
                              <MessageSquareIcon className="mr-2 h-4 w-4" /> Escribe tu Reseña
@@ -311,7 +311,7 @@ function ProductDetailPageContent() {
                     <div className="lg:col-span-1" id="review-form">
                          <Card className="sticky top-20"> {/* Sticky Form */}
                             <CardHeader>
-                                 <CardTitle className="text-xl flex items-center gap-2">
+                                 <CardTitle className="flex items-center gap-2 text-xl">
                                     <PawPrintIcon className="h-5 w-5 text-primary"/> ¡Comparte tu Experiencia!
                                  </CardTitle>
                              </CardHeader>
@@ -407,19 +407,19 @@ function ProductDetailPageContent() {
                                              </div>
                                         </div>
                                         {/* Stars */}
-                                         <div className="flex items-center flex-shrink-0">
+                                         <div className="flex flex-shrink-0 items-center">
                                             {[...Array(5)].map((_, i) => (
                                                 <StarIcon key={i} className={`h-4 w-4 ${i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground/50'}`} />
                                             ))}
                                         </div>
                                     </CardHeader>
                                     <CardContent className="px-4 pb-4">
-                                        <p className="text-sm text-foreground leading-relaxed">{review.comment}</p>
+                                        <p className="text-sm leading-relaxed text-foreground">{review.comment}</p>
                                         {review.photoUrl && (
                                             <div className="mt-4 aspect-video w-full max-w-[200px] overflow-hidden rounded border">
                                                 <Image
                                                     src={review.photoUrl} // Use placeholder if needed: `https://picsum.photos/seed/reviewphoto${review.id}/200/112`
-                                                    alt={`${review.reviewerName}'s Pawsome Pal`}
+                                                    alt={`${review.reviewerName}'s PetCouture Pal`} // Updated Alt Text
                                                     width={200}
                                                     height={112}
                                                     objectFit="cover"
@@ -432,8 +432,8 @@ function ProductDetailPageContent() {
                                 </Card>
                             ))
                         ) : (
-                            <div className="text-center py-10 border rounded-lg bg-card">
-                                <PawPrintIcon className="mx-auto h-10 w-10 text-muted-foreground mb-4" />
+                            <div className="rounded-lg border bg-card py-10 text-center">
+                                <PawPrintIcon className="mx-auto mb-4 h-10 w-10 text-muted-foreground" />
                                 <p className="text-muted-foreground">Aún no hay reseñas para este producto.</p>
                                 <p className="text-sm text-muted-foreground">¡Sé el primero en dejar tu huella!</p>
                             </div>
@@ -448,7 +448,7 @@ function ProductDetailPageContent() {
 // Loading Skeleton updated slightly for layout changes
 function ProductDetailLoadingSkeleton() {
     return (
-        <div className="container mx-auto px-4 py-12 animate-pulse">
+        <div className="container mx-auto animate-pulse px-4 py-12">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
                 {/* Image Skeleton */}
                 <div className="space-y-4">
@@ -463,7 +463,7 @@ function ProductDetailLoadingSkeleton() {
                 {/* Details Skeleton */}
                 <div className="space-y-6">
                      <div>
-                         <Skeleton className="h-8 w-3/4 mb-3" />
+                         <Skeleton className="mb-3 h-8 w-3/4" />
                          <Skeleton className="h-6 w-1/3" />
                      </div>
                     <Skeleton className="h-10 w-1/4" />
@@ -472,7 +472,7 @@ function ProductDetailLoadingSkeleton() {
                     <Skeleton className="h-4 w-full" />
 
                     <div className="space-y-2 pt-4">
-                         <Skeleton className="h-5 w-16 mb-2" />
+                         <Skeleton className="mb-2 h-5 w-16" />
                          <div className="flex gap-2">
                             <Skeleton className="h-9 w-14 rounded-md" />
                             <Skeleton className="h-9 w-14 rounded-md" />
@@ -480,7 +480,7 @@ function ProductDetailLoadingSkeleton() {
                          </div>
                     </div>
                      <div className="space-y-2 pt-4">
-                         <Skeleton className="h-5 w-16 mb-2" />
+                         <Skeleton className="mb-2 h-5 w-16" />
                          <div className="flex gap-3">
                             <Skeleton className="h-8 w-8 rounded-full" />
                             <Skeleton className="h-8 w-8 rounded-full" />
@@ -492,13 +492,13 @@ function ProductDetailLoadingSkeleton() {
                          <Skeleton className="h-9 w-32" />
                     </div>
                     <Skeleton className="h-12 w-full" />
-                     <Skeleton className="h-4 w-3/4 mt-4" />
+                     <Skeleton className="mt-4 h-4 w-3/4" />
                 </div>
             </div>
              <Separator className="my-12 lg:my-16" />
              <Skeleton className="mb-8 h-8 w-1/3" />
               <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
-                 <div className="lg:col-span-1 space-y-4 border rounded-lg p-4">
+                 <div className="space-y-4 rounded-lg border p-4 lg:col-span-1">
                     <Skeleton className="h-6 w-1/2" />
                      <Skeleton className="h-10 w-full" />
                     <Skeleton className="h-10 w-full" />

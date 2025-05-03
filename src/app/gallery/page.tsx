@@ -117,7 +117,7 @@ export default function GalleryPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <section className="mb-12 text-center">
-        <h1 className="mb-4 text-4xl font-bold text-primary md:text-5xl">Galería de Pawsome Pals</h1>
+        <h1 className="mb-4 text-4xl font-bold text-primary md:text-5xl">Galería de PetCouture</h1>
         <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
           ¡Mira a nuestros adorables clientes peludos luciendo sus productos favoritos! Pura ternura.
         </p>

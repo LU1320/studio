@@ -4,13 +4,13 @@ export default function PrivacyPolicyPage() {
       <h1 className="mb-6 text-3xl font-bold text-primary md:text-4xl">Privacy Policy</h1>
       <p className="mb-4 text-sm text-muted-foreground">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
 
-      <div className="prose prose-lg max-w-none dark:prose-invert prose-p:text-muted-foreground prose-headings:text-foreground prose-strong:text-foreground">
-        <p>
-          Pawsome Outfits ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website [Your Website URL], including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the "Site"). Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
+      <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-strong:text-foreground prose-ul:text-muted-foreground prose-li:text-muted-foreground">
+        <p className="text-muted-foreground">
+          PetCouture ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website [Your Website URL], including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the "Site"). Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
         </p>
 
         <h2>Collection of Your Information</h2>
-        <p>
+        <p className="text-muted-foreground">
           We may collect information about you in a variety of ways. The information we may collect on the Site includes:
         </p>
         <ul>
@@ -27,7 +27,7 @@ export default function PrivacyPolicyPage() {
         </ul>
 
         <h2>Use of Your Information</h2>
-        <p>
+        <p className="text-muted-foreground">
           Having accurate information about you permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the Site to:
         </p>
         <ul>
@@ -42,7 +42,7 @@ export default function PrivacyPolicyPage() {
         </ul>
 
         <h2>Disclosure of Your Information</h2>
-        <p>
+        <p className="text-muted-foreground">
           We may share information we have collected about you in certain situations. Your information may be disclosed as follows:
         </p>
         <ul>
@@ -54,30 +54,30 @@ export default function PrivacyPolicyPage() {
 
 
         <h2>Security of Your Information</h2>
-        <p>
+        <p className="text-muted-foreground">
           We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse.
         </p>
 
          <h2>Policy for Children</h2>
-        <p>
+        <p className="text-muted-foreground">
           We do not knowingly solicit information from or market to children under the age of 13. If you become aware of any data we have collected from children under age 13, please contact us using the contact information provided below.
         </p>
 
         <h2>Changes to This Privacy Policy</h2>
-        <p>
+        <p className="text-muted-foreground">
             We may update this Privacy Policy from time to time in order to reflect, for example, changes to our practices or for other operational, legal, or regulatory reasons. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.
         </p>
 
 
         <h2>Contact Us</h2>
-        <p>
+        <p className="text-muted-foreground">
           If you have questions or comments about this Privacy Policy, please contact us at:
           <br />
-          Pawsome Outfits
+          PetCouture
           <br />
           [Your Address Here - Optional]
           <br />
-          <a href="mailto:privacy@pawsomeoutfits.com" className="text-primary hover:underline">privacy@pawsomeoutfits.com</a>
+          <a href="mailto:privacy@petcouture.com" className="text-primary hover:underline">privacy@petcouture.com</a>
         </p>
       </div>
     </div>

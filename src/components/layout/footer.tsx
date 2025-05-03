@@ -13,7 +13,7 @@ export function Footer() {
         <div className="flex flex-col items-center md:items-start">
            <Link href="/" className="mb-4 flex items-center gap-2 text-xl font-bold text-primary"> {/* Increased size */}
             <PawPrintIcon className="h-7 w-7 text-primary" /> {/* Use PawPrintIcon, increased size */}
-            <span>Pawsome Pals</span> {/* Updated Brand Name */}
+            <span>PetCouture</span> {/* Updated Brand Name */}
           </Link>
           <p className="mb-4 text-center text-sm text-muted-foreground md:text-left">
             Impresiona con ternura, ¡como un perrito! {/* Updated Slogan */}
@@ -72,7 +72,7 @@ export function Footer() {
       <Separator className="my-8 bg-border" /> {/* Ensured separator uses border color */}
 
       <div className="container mx-auto px-4 text-center text-xs text-muted-foreground"> {/* Adjusted font size */}
-        © {new Date().getFullYear()} Pawsome Pals. Ternura Peluda Reservada. {/* Updated copyright */}
+        © {new Date().getFullYear()} PetCouture. Ternura Peluda Reservada. {/* Updated copyright */}
       </div>
     </footer>
   );
