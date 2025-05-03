@@ -9,14 +9,15 @@ export default function Home() {
       {/* Sección Principal */}
       <section className="relative mb-12 flex flex-col items-center justify-center rounded-lg bg-gradient-to-r from-primary/70 to-accent/50 p-8 text-center text-primary-foreground shadow-lg md:p-16">
         <div className="absolute inset-0 z-0 rounded-lg opacity-30 mix-blend-multiply">
-          <Image
-            src="https://picsum.photos/1200/400?grayscale&blur=2" // Placeholder pattern or soft background
+          {/* Background pattern or soft background */}
+          {/* <Image
+            src="https://picsum.photos/1200/400?grayscale&blur=2"
             alt="Patrón de fondo"
             layout="fill"
             objectFit="cover"
             priority
             className="rounded-lg"
-          />
+          /> */}
         </div>
         <div className="relative z-10">
           <h1 className="mb-4 text-4xl font-bold md:text-6xl">
@@ -25,16 +26,7 @@ export default function Home() {
           <p className="mb-6 text-lg md:text-xl">
             Ropa linda y cómoda para perritos modernos
           </p>
-          <div className="h-64 w-full overflow-hidden rounded-lg shadow-xl md:h-96">
-             <Image
-                src="https://picsum.photos/seed/whitedog/800/600" // Updated image seed to represent a white dog
-                alt="Perrito blanco adorable usando ropa" // Updated alt text in Spanish
-                width={800}
-                height={600}
-                className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-                priority
-              />
-          </div>
+          {/* Image Removed */}
           <Link href="/shop" passHref>
             <Button size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
               Compra Ahora
