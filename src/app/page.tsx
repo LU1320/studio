@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import Link from 'next/link';
 import Image from 'next/image';
@@ -31,7 +32,7 @@ export default function Home() {
                layout="fill"
                objectFit="cover"
                priority
-               className="rounded-lg"
+               className="" // Removed redundant rounding, parent div handles it
              />
            </div>
           <Link href="/shop" passHref>
