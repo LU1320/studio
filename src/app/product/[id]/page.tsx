@@ -20,7 +20,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { PawPrintIcon } from '@/components/icons/paw-print-icon';
@@ -284,7 +284,7 @@ function ProductDetailPageContent() {
                                  </CardTitle>
                              </CardHeader>
                             <CardContent>
-                                 <Form {...form}>
+                                 <FormProvider {...form}>
                                     <form onSubmit={form.handleSubmit(onSubmitReview)} className="space-y-4">
                                         <FormField
                                             control={form.control}
@@ -352,7 +352,7 @@ function ProductDetailPageContent() {
                                             {isSubmittingReview ? 'Enviando Reseña...' : 'Enviar Reseña'}
                                         </Button>
                                     </form>
-                                 </Form>
+                                 </FormProvider>
                              </CardContent>
                          </Card>
                     </div>
@@ -382,12 +382,11 @@ function ProductDetailPageContent() {
                                         {review.photoUrl && (
                                             <div className="relative mt-4 aspect-video w-full max-w-[200px] overflow-hidden rounded border">
                                                 <Image
-                                                    src={review.photoUrl.includes('placehold.co') ? review.photoUrl : `https://placehold.co/200x112.png`} // Ensure placeholder for old data too
+                                                    src={review.photoUrl.includes('placehold.co') ? review.photoUrl : `https://placehold.co/200x112.png`} 
                                                     alt={`El amigo peludo de ${review.reviewerName}`} 
                                                     width={200}
                                                     height={112}
                                                     style={{ objectFit: 'cover' }} 
-                                                    className="h-full w-full"
                                                     data-ai-hint="review photo" 
                                                 />
                                             </div>

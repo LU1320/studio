@@ -3,14 +3,15 @@
 
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import { CalendarIcon, UserIcon, ArrowLeftIcon, EditIcon, CheckIcon } from 'lucide-react'; // Added EditIcon
+import { CalendarIcon, ArrowLeftIcon, EditIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Suspense, useState, useEffect } from 'react'; // Added useState, useEffect
-import { Card, CardContent } from '@/components/ui/card'; // Added Card
-import { PawPrintIcon } from '@/components/icons/paw-print-icon'; // Added PawPrintIcon
+import { Suspense, useState, useEffect } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { PawPrintIcon } from '@/components/icons/paw-print-icon';
+import React from 'react';
 
 
 // Mock function to get post data by slug - replace with actual data fetching
@@ -27,8 +28,8 @@ const getPostBySlug = async (slug: string) => {
       excerpt: 'Descubre los peluches más suaves y resistentes para horas de diversión y colitas felices...',
       author: 'Experto Peludo',
       date: '2024-10-26',
-      imageUrl: 'https://placehold.co/800x400.png', // Updated
-      dataAiHint: 'dog toys', // Updated hint
+      imageUrl: 'https://placehold.co/800x400.png', 
+      dataAiHint: 'dog toys', 
       content: `
         <p class="mb-4">¿Tu perrito es un campeón masticador de peluches? ¡Genial! Mantenerlos entretenidos (y lejos de tus zapatos) es clave. Aquí te presentamos nuestro top 5 de juguetes de peluche que aguantan la ternura y la diversión:</p>
 
@@ -42,7 +43,6 @@ const getPostBySlug = async (slug: string) => {
 
         <p class="mb-4">Recuerda siempre supervisar a tu perrito mientras juega y revisar sus juguetes regularmente para asegurarte de que estén en buen estado.</p>
         
-        <!-- Placeholder for Next/Image component to be inserted here by replacing the div below -->
         <div data-type="image-placeholder" data-src="https://placehold.co/600x337.png" data-alt="Perrito masticando juguete" data-ai-hint="dog toy" class="my-6 aspect-video w-full overflow-hidden rounded-lg shadow-md">
         </div>
 
@@ -51,13 +51,13 @@ const getPostBySlug = async (slug: string) => {
     },
     {
       id: '2',
-      title: 'Guía de Tallas PetCouture: ¡Que la Ropita le Quede Perfecta!', // Updated Title
+      title: 'Guía de Tallas PetCouture: ¡Que la Ropita le Quede Perfecta!', 
       slug: 'guia-tallas-ropita',
       excerpt: 'Medir a tu perrito es fácil y divertido. Asegura el ajuste perfecto para máxima comodidad y estilo...',
       author: 'Modista Canina',
       date: '2024-10-20',
-      imageUrl: 'https://placehold.co/800x400.png', // Updated
-      dataAiHint: 'dog measure', // Updated hint
+      imageUrl: 'https://placehold.co/800x400.png', 
+      dataAiHint: 'dog measure', 
       content: `
         <p class="mb-4">¡Que tu amigo peludo luzca increíble empieza con la talla correcta! Evita devoluciones y asegura que tu perrito esté cómodo siguiendo estos sencillos pasos:</p>
 
@@ -78,7 +78,6 @@ const getPostBySlug = async (slug: string) => {
 
         <p class="mb-4"><strong>Consejo Pro:</strong> ¡Usa premios para que tu perrito se quede quieto durante la medición! Compara siempre tus medidas con la tabla de tallas específica de cada producto en nuestra tienda.</p>
 
-         <!-- Placeholder for Next/Image component to be inserted here by replacing the div below -->
          <div data-type="image-placeholder" data-src="https://placehold.co/600x337.png" data-alt="Perrito con ropa bien ajustada" data-ai-hint="dog shirt" class="my-6 aspect-video w-full overflow-hidden rounded-lg shadow-md">
          </div>
 
@@ -92,8 +91,8 @@ const getPostBySlug = async (slug: string) => {
       excerpt: 'Ideas de outfits prácticos y adorables para que tu perrito sea la estrella del parque...',
       author: 'Explorador Urbano',
       date: '2024-10-15',
-      imageUrl: 'https://placehold.co/800x400.png', // Updated
-      dataAiHint: 'dog park', // Updated hint
+      imageUrl: 'https://placehold.co/800x400.png', 
+      dataAiHint: 'dog park', 
       content: `
         <p class="mb-4">¡El parque es el paraíso social de nuestros amigos peludos! Es el lugar perfecto para correr, jugar y... ¡lucir fabuloso! Aquí te damos ideas para que tu perrito esté cómodo y a la moda:</p>
 
@@ -124,7 +123,6 @@ const getPostBySlug = async (slug: string) => {
                </Card>
         </div>
 
-         <!-- Placeholder for Next/Image component to be inserted here by replacing the div below -->
          <div data-type="image-placeholder" data-src="https://placehold.co/600x337.png" data-alt="Perrito con bandana en el parque" data-ai-hint="dog bandana" class="my-6 aspect-video w-full overflow-hidden rounded-lg shadow-md">
          </div>
 
@@ -133,11 +131,9 @@ const getPostBySlug = async (slug: string) => {
         <p>Encuentra el accesorio perfecto para el parque en nuestra colección de <a href="/shop?category=Accesorios" class="text-primary font-semibold hover:underline">accesorios encantadores</a>.</p>
       `,
     },
-    // Add more posts
   ];
 
   const post = posts.find(p => p.slug === slug);
-  // Ensure dataAiHint is 1-2 words
   let finalDataAiHint = post?.dataAiHint || '';
   if (!finalDataAiHint && post?.title) {
     finalDataAiHint = post.title.toLowerCase().split(/\s+/).slice(0, 2).join(' ');
@@ -151,10 +147,8 @@ const getPostBySlug = async (slug: string) => {
 function BlogPostPageContent() {
     const params = useParams();
     const slug = params.slug as string;
-    const [post, setPost] = useState<any>(null); // Use 'any' for mock data structure
+    const [post, setPost] = useState<any>(null); 
     const [isLoading, setIsLoading] = useState(true);
-    const [postContent, setPostContent] = useState<string | TrustedHTML>('');
-
 
     useEffect(() => {
         if (slug) {
@@ -162,41 +156,6 @@ function BlogPostPageContent() {
             getPostBySlug(slug)
                 .then(data => {
                     setPost(data);
-                    if (data?.content) {
-                        // Replace placeholders with Next/Image components
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(data.content, 'text/html');
-                        doc.querySelectorAll('div[data-type="image-placeholder"]').forEach(div => {
-                            const img = document.createElement('img'); // Create an img to transfer attributes
-                            img.src = div.getAttribute('data-src') || '';
-                            img.alt = div.getAttribute('data-alt') || '';
-                            img.dataset.aiHint = div.getAttribute('data-ai-hint') || '';
-                            img.className = "object-cover w-full h-full rounded-lg"; // Add necessary classes for styling within Image
-                            
-                            // Create the Next/Image structure as a string temporarily
-                            // Ideally, this would involve more complex client-side rendering or a different approach for security
-                            // For now, we'll keep it simple and acknowledge this is not a full solution for dynamic Next/Image insertion from HTML
-                            const imageComponentWrapper = document.createElement('div');
-                            imageComponentWrapper.className = "relative my-6 aspect-video w-full overflow-hidden rounded-lg shadow-md";
-                            
-                            // This is a conceptual representation. Direct string to Next/Image isn't straightforward.
-                            // In a real scenario, you might map content blocks to React components.
-                            const nextImageDiv = document.createElement('div');
-                            nextImageDiv.innerHTML = `<!-- NextImage src="${img.src}" alt="${img.alt}" data-ai-hint="${img.dataset.aiHint}" fill objectFit="cover" className="rounded-lg" -->`;
-                            // For demonstration, we'll just put the raw img tag back for now
-                            imageComponentWrapper.appendChild(img);
-                            div.replaceWith(imageComponentWrapper);
-
-                        });
-                        // This is a simplified approach. For full Next/Image capabilities,
-                        // you would typically parse the content into a structure that React can render,
-                        // mapping specific tags or placeholders to your React components.
-                        // For now, we will use dangerouslySetInnerHTML with the modified HTML.
-                         setPostContent(doc.body.innerHTML);
-
-                    } else {
-                        setPostContent('');
-                    }
                     setIsLoading(false);
                 })
                 .catch(err => {
@@ -229,8 +188,6 @@ function BlogPostPageContent() {
 
         const contentWithPlaceholders = post.content;
 
-        // This is a very basic replacement for demonstration.
-        // A more robust solution would parse the HTML and replace elements with React components.
         const parts = contentWithPlaceholders.split(/<div data-type="image-placeholder".*?<\/div>/gs);
         const imagePlaceholders = [...contentWithPlaceholders.matchAll(/<div data-type="image-placeholder" data-src="([^"]*)" data-alt="([^"]*)" data-ai-hint="([^"]*)".*?<\/div>/gs)];
 
@@ -257,32 +214,29 @@ function BlogPostPageContent() {
 
 
     return (
-        <div className="container mx-auto max-w-3xl px-4 py-12"> {/* Adjusted max-width */}
+        <div className="container mx-auto max-w-3xl px-4 py-12"> 
             <article>
-                {/* Back Button */}
-                <Link href="/blog" passHref className="mb-8 inline-block"> {/* Increased mb */}
+                <Link href="/blog" passHref className="mb-8 inline-block"> 
                     <Button variant="outline" size="sm">
                         <ArrowLeftIcon className="mr-2 h-4 w-4" /> Volver al Blog
                     </Button>
                 </Link>
 
-                {/* Post Header */}
-                <header className="mb-8 border-b border-border pb-6"> {/* Added border */}
-                    <h1 className="mb-4 text-3xl font-bold leading-tight text-primary md:text-4xl lg:text-5xl">{post.title}</h1> {/* Primary color title */}
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground"> {/* Flex wrap for smaller screens */}
+                <header className="mb-8 border-b border-border pb-6"> 
+                    <h1 className="mb-4 text-3xl font-bold leading-tight text-primary md:text-4xl lg:text-5xl">{post.title}</h1> 
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground"> 
                         <div className="flex items-center gap-1.5">
-                            <EditIcon className="h-4 w-4" /> {/* Changed icon */}
+                            <EditIcon className="h-4 w-4" /> 
                             <span>Por {post.author}</span>
                         </div>
                         <div className="flex items-center gap-1.5">
                             <CalendarIcon className="h-4 w-4" />
-                             <span>{new Date(post.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span> {/* Spanish locale */}
+                             <span>{new Date(post.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span> 
                         </div>
                     </div>
                 </header>
 
-                {/* Featured Image */}
-                <div className="relative mb-10 h-64 w-full overflow-hidden rounded-lg shadow-lg md:h-96"> {/* Increased mb and shadow */}
+                <div className="relative mb-10 h-64 w-full overflow-hidden rounded-lg shadow-lg md:h-96"> 
                      <Image
                         src={post.imageUrl}
                         alt={post.title}
@@ -294,18 +248,12 @@ function BlogPostPageContent() {
                         data-ai-hint={post.dataAiHint} 
                     />
                 </div>
-
-                {/* Post Content */}
                  <div
                     className="prose prose-lg max-w-none dark:prose-invert prose-p:leading-relaxed prose-headings:font-semibold prose-headings:tracking-tight prose-a:font-semibold prose-a:text-primary hover:prose-a:underline prose-strong:font-semibold prose-li:my-1 prose-li:marker:text-primary"
                   >
                     {renderContent()}
                   </div>
-
-
                  <Separator className="my-12" />
-
-                 {/* Related Posts or Author Bio (Optional) */}
                  <div className="text-center">
                      <h3 className="mb-4 text-xl font-semibold">¿Te gustó este post?</h3>
                      <p className="text-muted-foreground mb-6">¡Explora más consejos y ternura en nuestro blog!</p>
@@ -313,7 +261,6 @@ function BlogPostPageContent() {
                         <Button>Más Posts del Blog</Button>
                      </Link>
                  </div>
-
             </article>
         </div>
     );
@@ -323,24 +270,24 @@ function BlogPostPageContent() {
 function BlogLoadingSkeleton() {
   return (
     <div className="container mx-auto max-w-3xl px-4 py-12">
-      <Skeleton className="mb-8 h-8 w-32" /> {/* Back button */}
+      <Skeleton className="mb-8 h-8 w-32" /> 
       <header className="mb-8 space-y-4 border-b border-border pb-6">
-        <Skeleton className="h-10 w-full md:h-12 lg:h-14" /> {/* Title */}
-        <Skeleton className="h-10 w-3/4 md:h-12" /> {/* Title */}
+        <Skeleton className="h-10 w-full md:h-12 lg:h-14" /> 
+        <Skeleton className="h-10 w-3/4 md:h-12" /> 
         <div className="flex gap-4">
-          <Skeleton className="h-5 w-36" /> {/* Meta */}
-          <Skeleton className="h-5 w-48" /> {/* Meta */}
+          <Skeleton className="h-5 w-36" /> 
+          <Skeleton className="h-5 w-48" /> 
         </div>
       </header>
-      <Skeleton className="mb-10 h-64 w-full rounded-lg shadow-lg md:h-96" /> {/* Image */}
+      <Skeleton className="mb-10 h-64 w-full rounded-lg shadow-lg md:h-96" /> 
       <div className="space-y-4">
         <Skeleton className="h-5 w-full" />
         <Skeleton className="h-5 w-full" />
         <Skeleton className="h-5 w-5/6" />
-         <Skeleton className="h-8 w-1/3 mt-6" /> {/* Subheading Skeleton */}
+         <Skeleton className="h-8 w-1/3 mt-6" /> 
         <Skeleton className="h-5 w-full" />
         <Skeleton className="h-5 w-3/4" />
-         <Skeleton className="h-40 w-full rounded-lg mt-6" /> {/* Image inside content */}
+         <Skeleton className="h-40 w-full rounded-lg mt-6" /> 
          <Skeleton className="h-5 w-full" />
          <Skeleton className="h-5 w-1/2" />
       </div>
