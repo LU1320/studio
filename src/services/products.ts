@@ -1,3 +1,4 @@
+
 /**
  * Represents a product in the store.
  */
@@ -42,7 +43,7 @@ const ALL_PRODUCTS: Product[] = [
       name: 'Classic Striped Sweater',
       description: 'A cozy and timeless knit sweater for small to medium dogs. Perfect for chilly walks.',
       price: 29.99,
-      imageUrl: 'https://picsum.photos/seed/sweater1/400/300', // Placeholder
+      imageUrl: 'https://placehold.co/400x300.png', // Updated
       sizes: ['S', 'M', 'L'],
       colors: ['Blue', 'Red', 'Gray'],
       category: 'Sweaters'
@@ -52,7 +53,7 @@ const ALL_PRODUCTS: Product[] = [
       name: 'Waterproof Yellow Raincoat',
       description: 'Keep your pup dry during downpours with this bright yellow, hooded raincoat.',
       price: 39.99,
-      imageUrl: 'https://picsum.photos/seed/raincoat1/400/300', // Placeholder
+      imageUrl: 'https://placehold.co/400x300.png', // Updated
       sizes: ['S', 'M', 'L', 'XL'],
       colors: ['Yellow'],
       category: 'Raincoats'
@@ -62,7 +63,7 @@ const ALL_PRODUCTS: Product[] = [
       name: 'Cozy Fleece Hoodie',
       description: 'A soft fleece hoodie for ultimate comfort and warmth. Features a leash hole.',
       price: 34.50,
-      imageUrl: 'https://picsum.photos/seed/hoodie1/400/300', // Placeholder
+      imageUrl: 'https://placehold.co/400x300.png', // Updated
       sizes: ['M', 'L', 'XL'],
       colors: ['Gray', 'Pink', 'Navy'],
       category: 'Hoodies'
@@ -72,7 +73,7 @@ const ALL_PRODUCTS: Product[] = [
         name: 'Dapper Dog Bowtie Collar',
         description: 'Add a touch of class with this adjustable collar featuring a removable bowtie.',
         price: 18.99,
-        imageUrl: 'https://picsum.photos/seed/bowtie1/400/300', // Placeholder
+        imageUrl: 'https://placehold.co/400x300.png', // Updated
         sizes: ['S', 'M', 'L'], // Collar sizes
         colors: ['Red Plaid', 'Blue Dots', 'Black'],
         category: 'Accessories'
@@ -82,7 +83,7 @@ const ALL_PRODUCTS: Product[] = [
         name: 'Summer Fun Bandana',
         description: 'Lightweight and breathable cotton bandana for sunny days.',
         price: 12.00,
-        imageUrl: 'https://picsum.photos/seed/bandana1/400/300', // Placeholder
+        imageUrl: 'https://placehold.co/400x300.png', // Updated
         sizes: ['One Size'],
         colors: ['Tropical', 'Nautical', 'Watermelon'],
         category: 'Accessories'
@@ -92,7 +93,7 @@ const ALL_PRODUCTS: Product[] = [
         name: 'Reflective Safety Vest',
         description: 'Enhance visibility during nighttime walks with this bright, reflective vest.',
         price: 22.50,
-        imageUrl: 'https://picsum.photos/seed/vest1/400/300', // Placeholder
+        imageUrl: 'https://placehold.co/400x300.png', // Updated
         sizes: ['M', 'L', 'XL'],
         colors: ['Orange', 'Lime Green'],
         category: 'Outerwear'
@@ -102,7 +103,7 @@ const ALL_PRODUCTS: Product[] = [
       name: 'Cable Knit Turtleneck',
       description: 'A sophisticated turtleneck sweater with a classic cable knit pattern.',
       price: 32.99,
-      imageUrl: 'https://picsum.photos/seed/turtleneck1/400/300', // Placeholder
+      imageUrl: 'https://placehold.co/400x300.png', // Updated
       sizes: ['S', 'M'],
       colors: ['Cream', 'Burgundy'],
       category: 'Sweaters'
@@ -112,7 +113,7 @@ const ALL_PRODUCTS: Product[] = [
       name: 'Lightweight Windbreaker',
       description: 'Protects against wind and light rain, perfect for breezy days.',
       price: 36.00,
-      imageUrl: 'https://picsum.photos/seed/windbreaker1/400/300', // Placeholder
+      imageUrl: 'https://placehold.co/400x300.png', // Updated
       sizes: ['L', 'XL'],
       colors: ['Teal', 'Black'],
       category: 'Outerwear'
@@ -122,7 +123,7 @@ const ALL_PRODUCTS: Product[] = [
       name: 'Party Dress with Tutu',
       description: 'An adorable dress with a sparkly bodice and tulle tutu skirt for special occasions.',
       price: 45.00,
-      imageUrl: 'https://picsum.photos/seed/dress1/400/300', // Placeholder
+      imageUrl: 'https://placehold.co/400x300.png', // Updated
       sizes: ['XS', 'S', 'M'],
       colors: ['Pink', 'Silver'],
       category: 'Dresses'
@@ -132,7 +133,7 @@ const ALL_PRODUCTS: Product[] = [
       name: 'Plaid Flannel Shirt',
       description: 'A cool and casual flannel shirt, perfect for a rustic look.',
       price: 28.00,
-      imageUrl: 'https://picsum.photos/seed/flannel1/400/300', // Placeholder
+      imageUrl: 'https://placehold.co/400x300.png', // Updated
       sizes: ['M', 'L'],
       colors: ['Red Plaid', 'Green Plaid'],
       category: 'Shirts'

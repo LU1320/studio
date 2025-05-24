@@ -1,3 +1,4 @@
+
 /**
  * Represents a customer review for a product.
  */
@@ -40,7 +41,7 @@ let MOCK_REVIEWS: Review[] = [
       reviewerName: 'Buddy Owner',
       rating: 5,
       comment: 'My Corgi looks absolutely adorable in this sweater! It\'s soft, fits well, and keeps him warm on our morning walks. Great quality!',
-      photoUrl: 'https://picsum.photos/seed/review1/200/200', // Placeholder
+      photoUrl: 'https://placehold.co/200x200.png', // Updated
       date: '2024-10-22',
     },
     {
@@ -57,7 +58,7 @@ let MOCK_REVIEWS: Review[] = [
       reviewerName: 'Max Adventures',
       rating: 5,
       comment: 'Finally, a raincoat that actually keeps Max dry! The hood is a great feature, and the yellow makes him easy to spot. Highly recommend!',
-      photoUrl: 'https://picsum.photos/seed/review2/200/200', // Placeholder
+      photoUrl: 'https://placehold.co/200x200.png', // Updated
       date: '2024-10-25',
     },
      {
@@ -74,7 +75,7 @@ let MOCK_REVIEWS: Review[] = [
       reviewerName: 'Sir Reginald',
       rating: 4,
       comment: 'Makes my little gentleman look very distinguished for special occasions. The bowtie is easy to attach/detach.',
-       photoUrl: 'https://picsum.photos/seed/review4/200/200', // Placeholder
+       photoUrl: 'https://placehold.co/200x200.png', // Updated
       date: '2024-09-30',
     },
 ];

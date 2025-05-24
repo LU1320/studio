@@ -1,3 +1,4 @@
+
 'use client';
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -193,11 +194,12 @@ export default function ContactPage() {
                  <div className="relative h-64 w-full overflow-hidden rounded-lg border">
                      {/* Replace with actual map component or iframe */}
                      <Image
-                        src="https://picsum.photos/seed/pawsomemap/600/400" // Placeholder map image
+                        src="https://placehold.co/600x400.png" // Updated
                         alt="Mapa de ubicación de la tienda"
-                        fill // Use fill layout
-                        style={{ objectFit: 'cover' }} // Apply object-fit style
-                         data-ai-hint="map with paw prints" // AI hint
+                        fill 
+                        style={{ objectFit: 'cover' }} 
+                        data-ai-hint="map location" // Updated hint
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                      {/* You can overlay paw prints here if desired */}
                  </div>

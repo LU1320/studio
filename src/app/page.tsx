@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import Link from 'next/link';
 import Image from 'next/image';
@@ -30,6 +31,7 @@ export default function Home() {
                fill // Use fill layout
                style={{ objectFit: 'contain' }} // Use contain to show the whole logo
                priority
+               data-ai-hint="company logo" // Added AI hint for local image too
              />
            </div>
           <Link href="/shop" passHref>
@@ -77,11 +79,12 @@ export default function Home() {
              <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                <div className="relative h-48 w-full">
                  <Image
-                    src="https://picsum.photos/seed/pawsometoys/400/300"
+                    src="https://placehold.co/400x300.png" // Updated
                     alt="Juguetes para perros"
-                    data-ai-hint="cute dog toys plush"
-                    fill // Use fill layout
-                    style={{ objectFit: 'cover' }} // Apply object-fit style
+                    data-ai-hint="dog toys" // Updated hint
+                    fill 
+                    style={{ objectFit: 'cover' }} 
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                  />
                </div>
                <div className="p-4">
@@ -96,11 +99,12 @@ export default function Home() {
              <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                <div className="relative h-48 w-full">
                  <Image
-                    src="https://picsum.photos/seed/pawsomeapparel/400/300"
+                    src="https://placehold.co/400x300.png" // Updated
                     alt="Ropa para perros"
-                    data-ai-hint="dog wearing cute sweater"
-                    fill // Use fill layout
-                    style={{ objectFit: 'cover' }} // Apply object-fit style
+                    data-ai-hint="dog clothes" // Updated hint
+                    fill 
+                    style={{ objectFit: 'cover' }} 
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                  />
                </div>
                <div className="p-4">
@@ -115,11 +119,12 @@ export default function Home() {
                 <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                 <div className="relative h-48 w-full">
                     <Image
-                        src="https://picsum.photos/seed/pawsomeaccessories/400/300"
+                        src="https://placehold.co/400x300.png" // Updated
                         alt="Accesorios para perros"
-                         data-ai-hint="dog collar bandana"
-                        fill // Use fill layout
-                        style={{ objectFit: 'cover' }} // Apply object-fit style
+                         data-ai-hint="dog accessories" // Updated hint
+                        fill 
+                        style={{ objectFit: 'cover' }} 
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                      />
                 </div>
                <div className="p-4">

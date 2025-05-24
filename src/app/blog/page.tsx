@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,8 +15,8 @@ const blogPosts = [
     excerpt: 'Descubre los peluches más suaves y resistentes para horas de diversión y colitas felices...',
     author: 'Experto Peludo',
     date: '2024-10-26',
-    imageUrl: 'https://picsum.photos/seed/pawsomeblogtoys/400/250',
-    dataAiHint: 'dogs playing with plush toys',
+    imageUrl: 'https://placehold.co/400x250.png', // Updated
+    dataAiHint: 'dog toys', // Updated hint
   },
   {
     id: '2',
@@ -24,8 +25,8 @@ const blogPosts = [
     excerpt: 'Medir a tu perrito es fácil y divertido. Asegura el ajuste perfecto para máxima comodidad y estilo...',
     author: 'Modista Canina',
     date: '2024-10-20',
-    imageUrl: 'https://picsum.photos/seed/pawsomeblogmeasure/400/250',
-     dataAiHint: 'dog being measured with tape',
+    imageUrl: 'https://placehold.co/400x250.png', // Updated
+     dataAiHint: 'dog measure', // Updated hint
   },
    {
     id: '3',
@@ -34,8 +35,8 @@ const blogPosts = [
     excerpt: 'Ideas de outfits prácticos y adorables para que tu perrito sea la estrella del parque...',
     author: 'Explorador Urbano',
     date: '2024-10-15',
-    imageUrl: 'https://picsum.photos/seed/pawsomeblogpark/400/250',
-    dataAiHint: 'dogs playing fetch in park',
+    imageUrl: 'https://placehold.co/400x250.png', // Updated
+    dataAiHint: 'dog park', // Updated hint
   },
   // Add more posts if needed
 ];
@@ -61,11 +62,11 @@ export default function BlogPage() {
                        <Image
                           src={post.imageUrl}
                           alt={post.title}
-                          layout="fill"
-                          objectFit="cover"
+                          fill
+                          style={{ objectFit: 'cover' }}
                           className="transition-transform duration-500 ease-in-out group-hover:scale-105"
-                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" // Added sizes
-                           data-ai-hint={post.dataAiHint} // Added AI hint
+                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" 
+                           data-ai-hint={post.dataAiHint} 
                         />
                      </div>
                 </CardHeader>

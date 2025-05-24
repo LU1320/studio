@@ -1,3 +1,4 @@
+
 'use client'; // Needed for potential client-side cart logic
 
 import { Button } from "@/components/ui/button";
@@ -18,7 +19,7 @@ const initialCartItems = [
     quantity: 1,
     size: 'M',
     color: 'Blue',
-    imageUrl: 'https://picsum.photos/seed/cart1/100/100', // Use placeholder or actual image
+    imageUrl: 'https://placehold.co/100x100.png', // Updated
   },
   {
     id: 'cart-item-2',
@@ -28,7 +29,7 @@ const initialCartItems = [
     quantity: 1,
     size: 'L',
     color: 'Yellow',
-    imageUrl: 'https://picsum.photos/seed/cart2/100/100',
+    imageUrl: 'https://placehold.co/100x100.png', // Updated
   },
 ];
 
@@ -81,9 +82,11 @@ export default function CartPage() {
                   <Image
                     src={item.imageUrl}
                     alt={item.name}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: 'cover' }}
                     className="sm:rounded-l-lg"
+                    sizes="100px"
+                    data-ai-hint="cart item" // Added hint
                   />
                 </div>
                 <div className="flex flex-grow flex-col justify-between p-4">

@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -23,14 +24,13 @@ interface GalleryImage {
 const fetchGalleryImages = async (page = 1, limit = 12): Promise<GalleryImage[]> => {
   await new Promise(resolve => setTimeout(resolve, 800)); // Simulate network delay
 
-  // Create more diverse mock data using Picsum seeds
+  // Create more diverse mock data
   const seedOffset = (page - 1) * limit;
   return Array.from({ length: limit }, (_, index) => {
     const idNum = seedOffset + index + 1;
     return {
       id: `gallery-${idNum}`,
-      // Use different seeds for variety
-      imageUrl: `https://picsum.photos/seed/pawsomegallery${idNum}/400/400`,
+      imageUrl: `https://placehold.co/400x400.png`, // Updated
       altText: `Adorable customer dog ${idNum}`,
       photographer: `Perrito Feliz ${idNum}`, // Example owner name
       likes: Math.floor(Math.random() * 100), // Random likes
@@ -54,7 +54,6 @@ export default function GalleryPage() {
         if (newImages.length === 0) {
           setHasMore(false);
         } else {
-          // Avoid duplicates if re-fetching same page (though unlikely with current setup)
            setImages(prev => {
              const existingIds = new Set(prev.map(img => img.id));
              const uniqueNewImages = newImages.filter(img => !existingIds.has(img.id));
@@ -78,7 +77,6 @@ export default function GalleryPage() {
   };
 
   const handleLike = (id: string) => {
-    // Mock like update - in real app, send API request
     setImages(prevImages =>
       prevImages.map(img =>
         img.id === id ? { ...img, likes: img.likes + 1 } : img
@@ -91,13 +89,10 @@ export default function GalleryPage() {
      const file = event.target.files?.[0];
      if (file) {
          console.log("File selected:", file.name);
-         // TODO: Implement actual upload logic (e.g., to Firebase Storage, backend API)
-         // Show preview, send to server, update gallery optimistically or after success
          toast({
              title: "¡Foto Recibida!",
              description: `Gracias por compartir ${file.name}. La revisaremos pronto.`,
          });
-         // Reset file input if needed
          event.target.value = "";
      }
    };
@@ -134,7 +129,7 @@ export default function GalleryPage() {
                  type="file"
                  accept="image/*"
                  onChange={handleFileUpload}
-                 className="hidden" // Hide the default input styling
+                 className="hidden" 
              />
              <p className="mt-2 text-xs text-muted-foreground">¡Nos encantaría ver a tu perrito!</p>
          </div>
@@ -148,12 +143,13 @@ export default function GalleryPage() {
                 <Image
                     src={image.imageUrl}
                     alt={image.altText}
-                    fill // Use fill layout
-                    style={{ objectFit: 'cover' }} // Apply object-fit style
+                    fill 
+                    style={{ objectFit: 'cover' }} 
                     className="transition-transform duration-300 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    data-ai-hint="gallery dog" // Added hint
                  />
              </div>
-             {/* Overlay for info and like button - appears on hover */}
              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 via-black/20 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                  {image.photographer && <p className="text-xs font-medium text-white drop-shadow-sm">{image.photographer}</p>}
                  <div className="mt-1 flex items-center justify-between">
@@ -174,11 +170,9 @@ export default function GalleryPage() {
              </div>
           </Card>
         ))}
-        {/* Loading Skeletons */}
         {isLoading && renderSkeletons(6)}
       </section>
 
-      {/* Load More Button */}
       {hasMore && !isLoading && (
         <div className="mt-12 text-center">
           <Button onClick={handleLoadMore} disabled={isLoading}>
