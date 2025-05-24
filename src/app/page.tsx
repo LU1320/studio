@@ -26,7 +26,7 @@ export default function Home() {
           {/* Logo Image */}
            <div className="relative mt-8 h-48 w-48 overflow-hidden rounded-lg shadow-lg md:h-56 md:w-56"> {/* Adjusted size for logo */}
            <Image
-               src="https://placehold.co/200x200.png" // Changed from /logo.png
+               src="https://placehold.co/200x200.png" 
                alt="PetCouture Logo"
                fill
                style={{ objectFit: 'contain' }}
@@ -78,8 +78,8 @@ export default function Home() {
            <Link href="/shop?category=Juguetes%20Divertidos" className="group block"> {/* Updated category link */}
              <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                <div className="relative h-48 w-full">
-                 <Image
-                    src="https://placehold.co/400x300.png" 
+ <Image
+ src="/galeria/acesorios.jpg"
                     alt="Juguetes para perros"
                     data-ai-hint="dog toys" 
                     fill 
@@ -99,7 +99,7 @@ export default function Home() {
              <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                <div className="relative h-48 w-full">
                  <Image
-                    src="https://placehold.co/400x300.png" 
+                    src="/galeria/modapeluda.jpg" 
                     alt="Ropa para perros"
                     data-ai-hint="dog clothes" 
                     fill 

@@ -35,7 +35,7 @@ const blogPosts = [
     excerpt: 'Ideas de outfits prácticos y adorables para que tu perrito sea la estrella del parque...',
     author: 'Explorador Urbano',
     date: '2024-10-15',
-    imageUrl: 'https://placehold.co/400x250.png', // Updated
+    imageUrl: 'public/galeria/moda peluda.jpg', // Updated
     dataAiHint: 'dog park', // Updated hint
   },
   // Add more posts if needed
