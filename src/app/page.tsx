@@ -26,12 +26,12 @@ export default function Home() {
           {/* Logo Image */}
            <div className="relative mt-8 h-48 w-48 overflow-hidden rounded-lg shadow-lg md:h-56 md:w-56"> {/* Adjusted size for logo */}
            <Image
-               src="https://placehold.co/200x200.png" 
+               src="/logo.jpg"
                alt="PetCouture Logo"
                fill
                style={{ objectFit: 'contain' }}
                priority
-               data-ai-hint="company logo" 
+               data-ai-hint="company logo"
              />
            </div>
           <Link href="/shop" passHref>
@@ -78,12 +78,12 @@ export default function Home() {
            <Link href="/shop?category=Juguetes%20Divertidos" className="group block"> {/* Updated category link */}
              <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                <div className="relative h-48 w-full">
- <Image
- src="/galeria/acesorios.jpg"
+                 <Image
+                    src="https://placehold.co/400x300.png"
                     alt="Juguetes para perros"
-                    data-ai-hint="dog toys" 
-                    fill 
-                    style={{ objectFit: 'cover' }} 
+                    data-ai-hint="dog toys"
+                    fill
+                    style={{ objectFit: 'cover' }}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                  />
                </div>
@@ -99,11 +99,11 @@ export default function Home() {
              <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                <div className="relative h-48 w-full">
                  <Image
-                    src="/galeria/modapeluda.jpg" 
+                    src="/galeria/modapeluda.jpg"
                     alt="Ropa para perros"
-                    data-ai-hint="dog clothes" 
-                    fill 
-                    style={{ objectFit: 'cover' }} 
+                    data-ai-hint="dog clothes"
+                    fill
+                    style={{ objectFit: 'cover' }}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                  />
                </div>
@@ -119,11 +119,11 @@ export default function Home() {
                 <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                 <div className="relative h-48 w-full">
                     <Image
-                        src="https://placehold.co/400x300.png" 
+                        src="https://placehold.co/400x300.png"
                         alt="Accesorios para perros"
-                         data-ai-hint="dog accessories" 
-                        fill 
-                        style={{ objectFit: 'cover' }} 
+                         data-ai-hint="dog accessories"
+                        fill
+                        style={{ objectFit: 'cover' }}
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                      />
                 </div>
