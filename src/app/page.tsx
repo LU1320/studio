@@ -26,7 +26,7 @@ export default function Home() {
           {/* Logo Image */}
            <div className="relative mt-8 h-48 w-48 overflow-hidden rounded-lg shadow-lg md:h-56 md:w-56"> {/* Adjusted size for logo */}
            <Image
-               src="/logo.jpg"
+               src="/logo.jpg" // Updated to use logo.jpg
                alt="PetCouture Logo"
                fill
                style={{ objectFit: 'contain' }}
