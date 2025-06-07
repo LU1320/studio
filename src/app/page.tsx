@@ -24,11 +24,12 @@ export default function Home() {
             Impresiona con ternura, ¡como un perrito! {/* Slogan */}
           </p>
           {/* Logo Image */}
-           <div className="relative mt-8 h-48 w-48 overflow-hidden rounded-lg shadow-lg md:h-56 md:w-56"> {/* Adjusted size for logo */}
+           <div className="relative mt-8 h-64 w-64 overflow-hidden rounded-lg shadow-lg md:h-80 md:w-80"> {/* Adjusted size for logo */}
            <Image
-               src="/logo.jpg" // Updated to use logo.jpg
+               src="/logo.png" // Updated to use logo.png
                alt="PetCouture Logo"
-               fill
+               width={320} // Set width to match container or desired size
+               height={320} // Set height to match container or desired size
                style={{ objectFit: 'contain' }}
                priority
                data-ai-hint="company logo"
@@ -79,7 +80,7 @@ export default function Home() {
              <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                <div className="relative h-48 w-full">
                  <Image
-                    src="https://placehold.co/400x300.png"
+                    src="/galeria/acesorios.jpg"
                     alt="Juguetes para perros"
                     data-ai-hint="dog toys"
                     fill
@@ -119,7 +120,7 @@ export default function Home() {
                 <div className="overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                 <div className="relative h-48 w-full">
                     <Image
-                        src="https://placehold.co/400x300.png"
+                        src="/galeria/accesorios2.jpg"
                         alt="Accesorios para perros"
                          data-ai-hint="dog accessories"
                         fill

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils'; // Import cn utility
 import { PawPrintIcon } from '@/components/icons/paw-print-icon'; // Use PawPrintIcon
 
 const navItems = [
@@ -28,8 +28,8 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 text-lg font-semibold text-primary">
-          <PawPrintIcon className="h-7 w-7 text-primary" /> {/* Use PawPrintIcon, increased size */}
+        <Link href="/" className="flex items-center gap-2 text-lg font-semibold">
+          <img src="/logo.png" alt="PetCouture Logo" className="h-8 w-auto" /> {/* Use logo.png */}
           <span className="font-bold">PetCouture</span> {/* Updated Brand Name */}
         </Link>
 
@@ -61,7 +61,7 @@ export function Header() {
             <SheetTrigger asChild className="md:hidden">
               <Button variant="ghost" size="icon" aria-label="Abrir Menú">
                 <MenuIcon className="h-6 w-6" />
-              </Button>
+              </Button> 
             </SheetTrigger>
             <SheetContent side="left" className="w-full max-w-xs bg-background p-6">
                {/* Logo en Menú Móvil */}
